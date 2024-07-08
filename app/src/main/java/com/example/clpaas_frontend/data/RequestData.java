@@ -1,5 +1,8 @@
 package com.example.clpaas_frontend.data;
 
+import android.content.Context;
+import android.provider.Settings;
+
 import com.google.gson.annotations.SerializedName;
 
 public class RequestData {
@@ -19,7 +22,6 @@ public class RequestData {
 
     @SerializedName("userID")
     private String userID;
-
     @SerializedName("text")
     private String text;
 
@@ -32,4 +34,5 @@ public class RequestData {
         this.text = text;
         this.url = url;
     }
+
 }

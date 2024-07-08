@@ -1,7 +1,6 @@
 package com.example.clpaas_frontend.data;
 
 import com.google.gson.annotations.SerializedName;
-
 public class ResponseData {
 
     /*
@@ -9,16 +8,16 @@ public class ResponseData {
      * - 피싱이냐 아니냐
      * */
     @SerializedName("status")
-    private boolean status;
+    private String status;
 
     @SerializedName("userId")
     private String userID;
 
-    public boolean isStatus() {
+    public String isStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
