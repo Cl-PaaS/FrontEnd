@@ -3,7 +3,6 @@ package com.example.clpaas_frontend;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.content.BroadcastReceiver;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +13,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final int PERMISSION_REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

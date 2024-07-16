@@ -66,7 +66,11 @@ public class Clpaas_Receiver extends BroadcastReceiver {
 
             // 알림을 생성하고 커스터마이즈
             createNotificationChannel(context);
-            sendNotification(context, sender, content);
+            if (ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+                sendNotification(context, sender, content);
+            } else {
+                Log.d(TAG, "알림 권한이 없습니다.");
+            }
         }
     }
 
@@ -100,7 +104,8 @@ public class Clpaas_Receiver extends BroadcastReceiver {
         // 문자 알림 생성
         Intent intent = new Intent(context, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_sms_notification) // 알림 아이콘
