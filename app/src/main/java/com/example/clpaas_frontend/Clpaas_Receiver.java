@@ -1,5 +1,6 @@
 package com.example.clpaas_frontend;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -19,8 +20,8 @@ import java.util.Date;
 
 
 public class Clpaas_Receiver extends BroadcastReceiver {
-    private static final String TAG = "Clpaas_Receiver";
-    private static final String CHANNEL_ID = "sms_channel";
+    private static final String TAG = "Clpaas_Receiver"; //for log output
+    private static final String CHANNEL_ID = "sms_channel"; //definition of alarm channel
 
 
     //    @Override
@@ -91,6 +92,7 @@ public class Clpaas_Receiver extends BroadcastReceiver {
             CharSequence name = "SMS Channel";
             String description = "Channel for SMS notifications";
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
+
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
             channel.setDescription(description);
 
@@ -100,6 +102,7 @@ public class Clpaas_Receiver extends BroadcastReceiver {
         }
     }
 
+    @SuppressLint("NotificationPermission")
     private void sendNotification(Context context, String sender, String message) {
         // 문자 알림 생성
         Intent intent = new Intent(context, MainActivity.class);
