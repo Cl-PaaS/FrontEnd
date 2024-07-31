@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
-    private final static String API_URL="http://localhost:8080/";
+    private final static String API_URL="http://192.168.0.176:8080/";
 
     public static RetrofitService getApiService(){
         return getClient().create(RetrofitService.class);
@@ -27,4 +27,5 @@ public class RetrofitClient {
      *         -  baseUrl() :  서비스에서 사용할 루트를 설정하는 메서드 -> 이전에 할당받은 public dns
      *         -  addConverterFactory() : JSON을 분석할 수 있는 객체를 추가하는 메서드
  0    * */
+
 }

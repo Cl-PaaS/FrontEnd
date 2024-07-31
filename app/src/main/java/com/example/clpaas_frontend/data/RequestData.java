@@ -25,14 +25,11 @@ public class RequestData {
     @SerializedName("text")
     private String text;
 
-    @SerializedName("url")
-    private String url;
 
 
-    public RequestData(String userID, String text, String url) {
+    public RequestData(String userID, String text) {
         this.userID = userID;
         this.text = text;
-        this.url = url;
     }
 
 }
