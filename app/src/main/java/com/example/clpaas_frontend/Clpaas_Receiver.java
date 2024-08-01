@@ -119,8 +119,18 @@ public class Clpaas_Receiver extends BroadcastReceiver {
                 .setContentIntent(pendingIntent) // 알림 클릭 시 이동할 인텐트
                 .setAutoCancel(true); // 클릭 시 알림 자동 삭제
 
-        // 알림을 표시
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-        notificationManager.notify(1, builder.build());
+        try {
+            // 알림을 표시
+            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+            notificationManager.notify(1, builder.build());
+        } catch (SecurityException e) {
+            Log.e(TAG, "알림 권한이 거부되었습니다.", e);
+        }
+    }
+
+    private void requestNotificationPermission(Context context) {
+        if (context instanceof MainActivity) {
+            ActivityCompat.requestPermissions((MainActivity) context, new String[]{android.Manifest.permission.POST_NOTIFICATIONS}, 1);
+        }
     }
 }
