@@ -61,40 +61,57 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
     private void initializeServiceAndSendData() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
-            //String android_id = Settings.Secure.getString(ContentResolver contentResolver, Settings.Secure.ANDROID_ID);
-            //android_id 가져오기
-            String android_id = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
-            Log.d("Android ID", android_id);
-            service = RetrofitClient.getClient().create(RetrofitService.class);
-            service.requestData(new RequestData(android_id, "피싱 텍스트")).enqueue(new Callback<ResponseData>() {
-
+            getAndroidId(new AndroidIdCallback() {
                 @Override
-                public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
-                    if (response.isSuccessful()) {
-                        Log.d("응답 데이터", response.body().toString());
-                        ResponseData responseData = response.body(); //response.body() 를 통해 서버에서 받아온 데이터를 사용할 수 있음
+                public void onIdReceived(String android_id) {
+                    // FID를 사용하여 작업 수행
+                    Log.d("유저 ID", "Received Installation ID: " + android_id);
 
-                        // 서버에서 받은 데이터를 처리하는 로직
-                        if (responseData != null) {
-                            String someData = responseData.getSomeData();
-                            Log.d("서버에서 받은 데이터", someData);
+                    // RequestData 객체 선언 및 FID와 message 변수를 사용하여 데이터 설정
+                    RequestData requestData = new RequestData();
+                    requestData.setAndroidId(android_id); // FID 설정
+                    requestData.setMessage(message); // 메시지 설정
+
+                    service = RetrofitClient.getClient().create(RetrofitService.class);
+
+                    // RequestData 객체를 사용하여 서버에 요청 전송
+                    service.requestData(requestData).enqueue(new Callback<ResponseData>() {
+                        @Override
+                        public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
+                            if (response.isSuccessful()) {
+                                Log.d("응답 데이터", response.body().toString());
+
+                                // 서버로부터 받은 응답을 처리
+                                ResponseData responseData = response.body();
+                                if (responseData != null) {
+                                    String someData = responseData.getSomeData(); // 서버로부터 받은 데이터
+                                    Log.d("서버에서 받은 데이터", someData);
+
+                                    // 예: TextView를 이용하여 서버에서 받은 데이터를 사용자에게 표시
+                                    TextView textView = findViewById(R.id.textView); // TextView는 activity_main.xml에 정의
+                                    textView.setText(someData);
+                                }
+                            } else {
+                                Log.e("응답 실패", "응답을 받지 못했습니다.");
+                            }
                         }
-                    } else {
-                        Log.e("응답 실패", "응답을 받지 못했습니다.");
-                    }
-                }
-                @Override
-                public void onFailure(Call<ResponseData> call, Throwable t) {
-                    t.printStackTrace();
+
+                        @Override
+                        public void onFailure(Call<ResponseData> call, Throwable t) {
+                            t.printStackTrace();
+                        }
+                    });
                 }
             });
         } else {
             Log.e("Permission Error", "READ_PHONE_STATE permission not granted");
         }
-
     }
+
+
 
     // 권한 없을 경우 요청하는 함수
     public void requirePerms(){
@@ -107,8 +124,22 @@ public class MainActivity extends AppCompatActivity {
             initializeServiceAndSendData();
         }
     }
+    // FID를 반환하는 메소드
+    private void getAndroidId(AndroidIdCallback callback) {
+        FirebaseInstallations.getInstance().getId()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (task.isSuccessful()) {
+                            android_id = task.getResult();
+                            Log.d("Installations", "Installation ID: " + android_id);
+                            callback.onIdReceived(android_id); // 콜백 호출
 
-
-
-
+                        } else {
+                            Log.e("Installations", "Unable to get Installation ID");
+                            callback.onIdReceived(null); // 실패 시 null 반환
+                        }
+                    }
+                });
+    }
 }
