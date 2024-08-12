@@ -38,6 +38,11 @@ public class MainActivity extends AppCompatActivity {
     private RetrofitService service;
     private ResponseData responseData;
     private String android_id; // Class-level variable
+    private String message = "피싱 텍스트 test@naver.com 010-1234-5678 http://localhost:8080"; //피싱 텍스트
+    // 콜백 인터페이스 정의
+    interface AndroidIdCallback {
+        void onIdReceived(String android_id);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,20 +71,33 @@ public class MainActivity extends AppCompatActivity {
     }
     private void initializeServiceAndSendData() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
-            android_id = getAndroidId();
-            service = RetrofitClient.getClient().create(RetrofitService.class);
-            service.requestData(new RequestData(android_id, "피싱 텍스트")).enqueue(new Callback<ResponseData>() {
-                    @Override
-                    public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
-                        if (response.isSuccessful()) {
-                            Log.d("응답 데이터", response.body().toString());
+            getAndroidId(new AndroidIdCallback() {
+                @Override
+                public void onIdReceived(String android_id) {
+                    // FID를 사용하여 작업 수행
+                    Log.d("유저 ID", "Received Installation ID: " + android_id);
+                    service = RetrofitClient.getClient().create(RetrofitService.class);
+                    //request Data 객체 선언, getter,setter 메소드 사용
+                    RequestData requestData = new RequestData(android_id, message);
+
+
+                    // 메시지를 나중에 다연이가 따로 받아오는 값으로 변경해주면됨
+                    service.requestData(requestData).enqueue(new Callback<ResponseData>()
+                    {
+                        @Override
+                        public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
+                            if (response.isSuccessful()) {
+                                Log.d("응답 데이터", response.body().toString());
+                            }
                         }
-                    }
-                    @Override
-                    public void onFailure(Call<ResponseData> call, Throwable t) {
-                        t.printStackTrace();
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<ResponseData> call, Throwable t) {
+                            t.printStackTrace();
+                        }
+                    });
+
+                }
+            });
 
             /***
              *
@@ -107,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     // FID를 반환하는 메소드
-    private String getAndroidId() {
+    private void getAndroidId(AndroidIdCallback callback) {
             FirebaseInstallations.getInstance().getId()
                     .addOnCompleteListener(new OnCompleteListener<String>() {
                         @Override
@@ -115,13 +133,17 @@ public class MainActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 android_id = task.getResult();
                                 Log.d("Installations", "Installation ID: " + android_id);
+                                callback.onIdReceived(android_id); // 콜백 호출
+
                             } else {
                                 Log.e("Installations", "Unable to get Installation ID");
+                                callback.onIdReceived(null); // 실패 시 null 반환
                             }
                         }
                     });
-            return android_id;
     }
+
+
 
 
 }
