@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.content.ContentResolver;
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -14,6 +15,9 @@ import com.example.clpaas_frontend.data.RequestData;
 import com.example.clpaas_frontend.data.ResponseData;
 import com.example.clpaas_frontend.data.RetrofitClient;
 import com.example.clpaas_frontend.data.RetrofitService;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.installations.FirebaseInstallations;
 
 
 import java.io.IOException;
@@ -29,9 +33,16 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 public class MainActivity extends AppCompatActivity {
 
+
     private static final int PERMISSION_REQUEST_CODE = 1;
     private RetrofitService service;
     private ResponseData responseData;
+    private String android_id; // Class-level variable
+    private String message = "피싱 텍스트 test@naver.com 010-1234-5678 http://localhost:8080"; //피싱 텍스트
+    // 콜백 인터페이스 정의
+    interface AndroidIdCallback {
+        void onIdReceived(String android_id);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
