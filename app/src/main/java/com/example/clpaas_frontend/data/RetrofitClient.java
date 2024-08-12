@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
-    private final static String API_URL="http://192.168.0.176:8080/";
+    private final static String API_URL="http://192.168.0.176:8080/check";
 
     public static RetrofitService getApiService(){
         return getClient().create(RetrofitService.class);

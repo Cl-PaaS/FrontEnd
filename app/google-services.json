@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "286707677031",
+    "project_id": "clpaas",
+    "storage_bucket": "clpaas.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:286707677031:android:c8dcaa97a753f24ffea1c2",
+        "android_client_info": {
+          "package_name": "com.example.clpaas_frontend"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqiShIlAUFC7wjUEtz-PusjhhzfnxdjuQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
