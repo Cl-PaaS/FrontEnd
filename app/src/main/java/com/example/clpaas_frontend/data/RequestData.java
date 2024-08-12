@@ -25,14 +25,26 @@ public class RequestData {
     @SerializedName("text")
     private String text;
 
-    @SerializedName("url")
-    private String url;
 
 
-    public RequestData(String userID, String text, String url) {
+    public RequestData(String userID, String text) {
         this.userID = userID;
         this.text = text;
-        this.url = url;
     }
 
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
 }
