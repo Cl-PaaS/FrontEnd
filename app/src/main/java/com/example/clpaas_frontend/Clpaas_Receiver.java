@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
 import android.util.Log;
@@ -13,50 +14,25 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.os.Build;
 
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 
 import java.util.Date;
-
 
 public class Clpaas_Receiver extends BroadcastReceiver {
     private static final String TAG = "Clpaas_Receiver"; //for log output
     private static final String CHANNEL_ID = "sms_channel"; //definition of alarm channel
 
-
-    //    @Override
-//    public void onReceive(Context context, Intent intent) {
-//        // 인텐트로부터 SMS 메시지를 추출하고 로그에 기록
-//        if (intent.getAction().equals("android.provider.Telephony.SMS_RECEIVED")) {
-//            Object[] pdus = (Object[]) intent.getExtras().get("pdus");
-//            for (Object pdu : pdus) {
-//                SmsMessage smsMessage = SmsMessage.createFromPdu((byte[]) pdu);
-//                String sender = smsMessage.getDisplayOriginatingAddress();
-//                String message = smsMessage.getDisplayMessageBody();
-//                Log.d(TAG, "보낸 사람 : " + sender + ", 메시지 : " + message);
-//
-//                // 피싱 및 스팸 메시지인지 분석하는 로직 추가
-//                // analyzeMessage(sender, message);
-//            }
-//        }
-//    }
-//
-//    // 피싱 및 스팸 메시지 분석하는 메서드
-//    private void analyzeMessage(String sender, String message) {
-//        // 분석 로직 구현
-//        if (message.contains("피싱") || message.contains("스팸")) {
-//            Log.d(TAG, "피싱 또는 스팸 메시지로 판별됨");
-//        } else {
-//            Log.d(TAG, "정상 메시지로 판별됨");
-//        }
-//    }
+    @Override
     public void onReceive(Context context, Intent intent) {
         Log.d(TAG, "onReceive() called");
 
         Bundle bundle = intent.getExtras();
         SmsMessage[] messages = parseSmsMessage(bundle);
 
-        if(messages.length > 0){
+        if (messages.length > 0) {
             String sender = messages[0].getOriginatingAddress();
             String content = messages[0].getMessageBody().toString();
             Date date = new Date(messages[0].getTimestampMillis());
@@ -67,21 +43,23 @@ public class Clpaas_Receiver extends BroadcastReceiver {
 
             // 알림을 생성하고 커스터마이즈
             createNotificationChannel(context);
-            if (ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
                 sendNotification(context, sender, content);
             } else {
                 Log.d(TAG, "알림 권한이 없습니다.");
+                // 권한 요청
+                requestNotificationPermission(context);
             }
         }
     }
 
-    private SmsMessage[] parseSmsMessage(Bundle bundle){
-        //PDU: Protocol Date Units
+    private SmsMessage[] parseSmsMessage(Bundle bundle) {
+        //PDU: Protocol Data Units
         Object[] objs = (Object[]) bundle.get("pdus");
         SmsMessage[] messages = new SmsMessage[objs.length];
 
-        for(int i=0; i< objs.length; i++){
-            messages[i] = SmsMessage.createFromPdu((byte[])objs[i]);
+        for (int i = 0; i < objs.length; i++) {
+            messages[i] = SmsMessage.createFromPdu((byte[]) objs[i]);
         }
         return messages;
     }
@@ -107,7 +85,6 @@ public class Clpaas_Receiver extends BroadcastReceiver {
         // 문자 알림 생성
         Intent intent = new Intent(context, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
