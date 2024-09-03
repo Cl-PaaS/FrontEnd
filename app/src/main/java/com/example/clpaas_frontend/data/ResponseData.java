@@ -13,6 +13,9 @@ public class ResponseData {
     @SerializedName("userId")
     private String userID;
 
+    @SerializedName("someData") // JSON에서 this 필드에 매핑될 키 이름이 someData인 경우
+    private String someData;
+
     public String isStatus() {
         return status;
     }
@@ -29,9 +32,7 @@ public class ResponseData {
         this.userID = userID;
     }
 
-    public String getSomeData() {
-        return someData;
-    }
+    public String getSomeData() { return someData; }
 
     public void setSomeData(String someData) {
         this.someData = someData;
