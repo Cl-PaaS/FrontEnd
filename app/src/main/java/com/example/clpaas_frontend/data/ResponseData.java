@@ -28,4 +28,12 @@ public class ResponseData {
     public void setUserID(String userID) {
         this.userID = userID;
     }
+
+    public String getSomeData() {
+        return someData;
+    }
+
+    public void setSomeData(String someData) {
+        this.someData = someData;
+    }
 }
