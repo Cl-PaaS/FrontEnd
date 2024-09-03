@@ -9,4 +9,5 @@ public interface RetrofitService {
     Call<ResponseData> requestData(@Body RequestData data);
     // 나중에 여기를 수정해야함 ( api 경로)
 
+
 }

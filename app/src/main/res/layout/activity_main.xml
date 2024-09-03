@@ -22,8 +22,10 @@
         android:id="@+id/sendDataButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/send_data"
         android:layout_centerInParent="true"
-        tools:ignore="MissingConstraints" />
+        android:text="@string/send_data"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="595dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
