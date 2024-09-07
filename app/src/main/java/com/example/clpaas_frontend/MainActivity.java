@@ -83,31 +83,58 @@ public class MainActivity extends AppCompatActivity {
 
                     // RequestData 객체 선언 및 FID와 message 변수를 사용하여 데이터 설정
                     RequestData requestData = new RequestData();
-
                     requestData.setAndroidId(android_id); // FID 설정
                     requestData.setMessage(message); // 메시지 설정
 
                     service = RetrofitClient.getClient().create(RetrofitService.class);
 
-                    // RequestData 객체를 사용하여 서버에 요청 전송
-                    service.requestData(requestData).enqueue(new Callback<ResponseData>() {
+                    // 병렬로 API 호출
+                    Call<ResponseData> call1 = service.requestDataFromApi1(requestData);
+                    Call<ResponseData> call2 = service.requestDataFromApi2(requestData);
+                    Call<ResponseData> call3 = service.requestDataFromApi3(requestData);
+
+                    // 첫 번째 API 호출
+                    call1.enqueue(new Callback<ResponseData>() {
                         @Override
                         public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
-                            if (response.isSuccessful()) {
-                                Log.d("응답 데이터", response.body().toString());
-
-                                // 서버로부터 받은 응답을 처리
-                                ResponseData responseData = response.body();
-                                if (responseData != null) {
-                                    String someData = responseData.getSomeData(); // 서버로부터 받은 데이터
-                                    Log.d("서버에서 받은 데이터", someData);
-
-                                    // 예: TextView를 이용하여 서버에서 받은 데이터를 사용자에게 표시
-                                    TextView textView = findViewById(R.id.textView); // TextView는 activity_main.xml에 정의
-                                    textView.setText(someData);
-                                }
+                            if (response.isSuccessful() && response.body() != null) {
+                                handleApiResult(response.body(), 1);
                             } else {
-                                Log.e("응답 실패", "응답을 받지 못했습니다.");
+                                Log.e("API 1 응답 실패", "응답을 받지 못했습니다.");
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseData> call, Throwable t) {
+                            t.printStackTrace();
+                        }
+                    });
+
+                    // 두 번째 API 호출
+                    call2.enqueue(new Callback<ResponseData>() {
+                        @Override
+                        public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
+                            if (response.isSuccessful() && response.body() != null) {
+                                handleApiResult(response.body(), 2);
+                            } else {
+                                Log.e("API 2 응답 실패", "응답을 받지 못했습니다.");
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseData> call, Throwable t) {
+                            t.printStackTrace();
+                        }
+                    });
+
+                    // 세 번째 API 호출
+                    call3.enqueue(new Callback<ResponseData>() {
+                        @Override
+                        public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
+                            if (response.isSuccessful() && response.body() != null) {
+                                handleApiResult(response.body(), 3);
+                            } else {
+                                Log.e("API 3 응답 실패", "응답을 받지 못했습니다.");
                             }
                         }
 
@@ -121,6 +148,19 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Log.e("Permission Error", "READ_PHONE_STATE permission not granted");
         }
+    }
+
+    // API 결과 처리 메서드
+    private void handleApiResult(ResponseData responseData, int apiIndex) {
+        // 각 API에서 받은 데이터를 저장 또는 처리
+        String apiResult = "API " + apiIndex + " 데이터: " + responseData.getSomeData();
+
+        // 화면 업데이트는 메인 스레드에서 이루어져야 하므로 runOnUiThread 사용
+        runOnUiThread(() -> {
+            TextView textView = findViewById(R.id.textView);
+            String currentText = textView.getText().toString();
+            textView.setText(currentText + "\n" + apiResult);
+        });
     }
 
     // 권한 없을 경우 요청하는 함수
