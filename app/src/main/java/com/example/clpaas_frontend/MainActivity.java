@@ -29,16 +29,18 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 public class MainActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE = 1;
+    private static final int REQUEST_CODE_READ_PHONE_STATE = 1;
     private RetrofitService service;
     private ResponseData responseData;
     private String android_id; // Class-level variable
-    private String message = "피싱 텍스트 test@naver.com 010-1234-5678 http://localhost:8080"; //피싱 텍스트
+    private String message = "피싱 텍스트 test@naver.com 010-1234-5678 http://10.0.2.2:8080"; //피싱 텍스트
 
     // 콜백 인터페이스 정의
     interface AndroidIdCallback {
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         View textView = findViewById(R.id.textView);
+        Button sendDataButton = findViewById(R.id.sendDataButton);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -58,7 +61,13 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        requirePerms();
+        sendDataButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Trigger the API calls here when the button is clicked
+                requirePerms();  // Ensure permissions are checked
+            }
+        });
     }
 
     @Override
@@ -167,9 +176,12 @@ public class MainActivity extends AppCompatActivity {
     public void requirePerms(){
         String[] permissions = {Manifest.permission.RECEIVE_SMS, Manifest.permission.READ_PHONE_STATE};
         int permissionCheck = ContextCompat.checkSelfPermission(this,Manifest.permission.RECEIVE_SMS);
-        if (permissionCheck == PackageManager.PERMISSION_DENIED){
-            //ActivityCompat.requestPermissions(this, permissions, 1);
-            ActivityCompat.requestPermissions(this, permissions, PERMISSION_REQUEST_CODE);
+        int readPhoneStatePermissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
+
+        if (permissionCheck == PackageManager.PERMISSION_DENIED ||
+                readPhoneStatePermissionCheck == PackageManager.PERMISSION_DENIED) {
+                //ActivityCompat.requestPermissions(this, permissions, 1);
+                ActivityCompat.requestPermissions(this, permissions, PERMISSION_REQUEST_CODE);
         }else {
             initializeServiceAndSendData();
         }
