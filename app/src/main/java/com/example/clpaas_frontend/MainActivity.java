@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                             if (response.isSuccessful() && response.body() != null) {
                                 handleApiResult(response.body(), 1);
                             } else {
-                                Log.e("API 1 응답 실패", "응답을 받지 못했습니다.");
+                                Log.d("API 1 응답 실패", "응답을 받지 못했습니다.");
                             }
                         }
 
@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
                             if (response.isSuccessful() && response.body() != null) {
                                 handleApiResult(response.body(), 2);
                             } else {
-                                Log.e("API 2 응답 실패", "응답을 받지 못했습니다.");
+                                Log.d("API 2 응답 실패", "응답을 받지 못했습니다.");
                             }
                         }
 
@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
                             if (response.isSuccessful() && response.body() != null) {
                                 handleApiResult(response.body(), 3);
                             } else {
-                                Log.e("API 3 응답 실패", "응답을 받지 못했습니다.");
+                                Log.d("API 3 응답 실패", "응답을 받지 못했습니다.");
                             }
                         }
 
@@ -176,9 +176,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         runOnUiThread(() -> {
-            TextView textView = findViewById(R.id.textView);
-            String currentText = textView.getText().toString();
-            textView.setText(currentText + "\n" + "API " + apiIndex + " 데이터: " + (responseData.getSomeData() != null ? responseData.getSomeData() : "응답 없음"));
+            String logMessage = "API " + apiIndex + " 데이터: " + (responseData.getSomeData() != null ? responseData.getSomeData() : "응답 없음");
+            Log.d("API Response", logMessage);
         });
     }
 

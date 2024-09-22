@@ -7,7 +7,7 @@ public interface RetrofitService {
     // 데이터 전달 및 값 받아오기
     // 나중에 여기를 수정해야함 ( api 경로)
 
-    @POST("api/message")
+    @POST("api/message1")
     Call<ResponseData> requestDataFromApi1(@Body RequestData data);
 
     // 두 번째 API 호출
