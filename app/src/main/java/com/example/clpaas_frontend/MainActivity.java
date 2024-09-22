@@ -167,6 +167,9 @@ public class MainActivity extends AppCompatActivity {
         boolean isPhishing = responseData.getSomeData() != null && responseData.getSomeData().equalsIgnoreCase("True");
         phishingResults[apiIndex - 1] = isPhishing; // 결과 저장
 
+        Log.d("API Result", "API " + apiIndex + " - isPhishing: " + isPhishing);
+
+        // 추가 로직: 모든 API 응답을 받은 후 처리할 로직을 여기에 추가
         // 모든 API 호출이 완료된 후 결과를 처리
         if (apiIndex == 3) {
             // ResultActivity로 결과 전달

@@ -16,6 +16,19 @@ public class ResponseData {
     @SerializedName("someData") // JSON에서 this 필드에 매핑될 키 이름이 someData인 경우
     private String someData;
 
+    // 윤호 BE, clpass-python
+    @SerializedName("isPhishing")
+    private boolean isPhishing;
+
+    public boolean getIsPhishing() {
+        return isPhishing;
+    }
+
+    public void setIsPhishing(boolean isPhishing) {
+        this.isPhishing = isPhishing;
+    }
+    //
+
     public String isStatus() {
         return status;
     }
