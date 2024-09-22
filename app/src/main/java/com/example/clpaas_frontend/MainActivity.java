@@ -27,6 +27,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -35,6 +36,7 @@ import android.widget.TextView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 public class MainActivity extends AppCompatActivity {
+    private boolean[] phishingResults = new boolean[3]; // 결과를 저장할 배열 추가
     private static final int PERMISSION_REQUEST_CODE = 1;
     private static final int REQUEST_CODE_READ_PHONE_STATE = 1;
     private RetrofitService service;
@@ -161,14 +163,22 @@ public class MainActivity extends AppCompatActivity {
 
     // API 결과 처리 메서드
     private void handleApiResult(ResponseData responseData, int apiIndex) {
-        // 각 API에서 받은 데이터를 저장 또는 처리
-        String apiResult = "API " + apiIndex + " 데이터: " + responseData.getSomeData();
+        // someData가 null인지 확인
+        boolean isPhishing = responseData.getSomeData() != null && responseData.getSomeData().equalsIgnoreCase("True");
+        phishingResults[apiIndex - 1] = isPhishing; // 결과 저장
 
-        // 화면 업데이트는 메인 스레드에서 이루어져야 하므로 runOnUiThread 사용
+        // 모든 API 호출이 완료된 후 결과를 처리
+        if (apiIndex == 3) {
+            // ResultActivity로 결과 전달
+            Intent intent = new Intent(MainActivity.this, ResultActivity.class);
+            intent.putExtra("results", phishingResults); // 결과 배열 전달
+            startActivity(intent);
+        }
+
         runOnUiThread(() -> {
             TextView textView = findViewById(R.id.textView);
             String currentText = textView.getText().toString();
-            textView.setText(currentText + "\n" + apiResult);
+            textView.setText(currentText + "\n" + "API " + apiIndex + " 데이터: " + (responseData.getSomeData() != null ? responseData.getSomeData() : "응답 없음"));
         });
     }
 
@@ -204,4 +214,5 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
     }
+
 }
