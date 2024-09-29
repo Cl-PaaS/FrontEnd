@@ -14,12 +14,16 @@ public interface RetrofitService {
     @GET("clpaas-python/check-url")
     Call<ResponseData> requestDataFromApi1(@Query("url") String url);
 
-    @POST("api/message1")
-    Call<ResponseData> requestDataFromApi1(@Body RequestData data);
+    //유빈BE
+    @GET("spring/check-url")
+    Call<ResponseData> requestDataFromApi2(@Query("url") String url);
 
-    // 두 번째 API 호출
-    @POST("api/message2") // 두 번째 API 엔드포인트
-    Call<ResponseData> requestDataFromApi2(@Body RequestData data);
+//    @POST("api/message1")
+//    Call<ResponseData> requestDataFromApi1(@Body RequestData data);
+//
+//    // 두 번째 API 호출
+//    @POST("api/message2") // 두 번째 API 엔드포인트
+//    Call<ResponseData> requestDataFromApi2(@Body RequestData data);
 
     // 세 번째 API 호출
     @POST("api/message3") // 세 번째 API 엔드포인트

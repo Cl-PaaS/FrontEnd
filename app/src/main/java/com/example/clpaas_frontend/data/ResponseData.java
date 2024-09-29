@@ -7,6 +7,33 @@ public class ResponseData {
      * - 사용자 식별자
      * - 피싱이냐 아니냐
      * */
+
+    // BE
+    @SerializedName("isPhishing")
+    private boolean isPhishing;
+
+    // Getter and Setter for isPhishing
+    public boolean getIsPhishing() {
+        return isPhishing;
+    }
+
+    public void setIsPhishing(boolean isPhishing) {
+        this.isPhishing = isPhishing;
+    }
+
+    @SerializedName("originalUrl")
+    private String originalUrl;
+
+    // Getter and Setter for originalUrl
+    public String getOriginalUrl(){
+        return originalUrl;
+    }
+
+    public void setOriginalUrl(String originalUrl){
+        this.originalUrl = originalUrl;
+    }
+
+
     @SerializedName("status")
     private String status;
 
@@ -15,19 +42,6 @@ public class ResponseData {
 
     @SerializedName("someData") // JSON에서 this 필드에 매핑될 키 이름이 someData인 경우
     private String someData;
-
-    // 윤호 BE, clpass-python
-    @SerializedName("isPhishing")
-    private boolean isPhishing;
-
-    public boolean getIsPhishing() {
-        return isPhishing;
-    }
-
-    public void setIsPhishing(boolean isPhishing) {
-        this.isPhishing = isPhishing;
-    }
-    //
 
     public String isStatus() {
         return status;
