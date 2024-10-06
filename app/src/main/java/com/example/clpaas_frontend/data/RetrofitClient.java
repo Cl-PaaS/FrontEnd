@@ -11,15 +11,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
 
-    private final static String API_URL = "http://10.0.2.2:8080/";
-
     // API 호출 시 사용할 RetrofitService 인터페이스
-    public static RetrofitService getApiService() {
-        return getClient().create(RetrofitService.class);
-    }
+//    public static RetrofitService getApiService() {
+//        return getClient().create(RetrofitService.class);
+//    }
 
     // Retrofit 클라이언트 설정
-    public static Retrofit getClient() {
+    public static Retrofit getClient(String baseUrl) {
         // Gson 변환기
         Gson gson = new GsonBuilder().setLenient().create();
 
@@ -32,11 +30,24 @@ public class RetrofitClient {
 
         // Retrofit 빌더
         return new Retrofit.Builder()
-                .baseUrl(API_URL)
-                // .baseUrl("http://clpass-base-url.com/") // API 기본 URL 값으로 수정하기
+                .baseUrl(baseUrl)
                 .client(okHttpClient)                 // OkHttpClient 적용
                 .addConverterFactory(GsonConverterFactory.create(gson)) // JSON을 변환하기 위한 GSON 사용
                 .build();
+    }
+    // 첫 번째 API 호출을 위한 서비스 생성
+    public static RetrofitService getApiServiceForFirst() {
+        return getClient("http://backend.210-104-77-246.nip.io/check").create(RetrofitService.class);
+    }
+
+    // 두 번째 API 호출을 위한 서비스 생성
+    public static RetrofitService getApiServiceForSecond() {
+        return getClient("http://api2.example.com/").create(RetrofitService.class);
+    }
+
+    // 세 번째 API 호출을 위한 서비스 생성
+    public static RetrofitService getApiServiceForThird() {
+        return getClient("http://api3.example.com/").create(RetrofitService.class);
     }
 }
 

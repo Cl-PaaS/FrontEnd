@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void initializeServiceAndSendData() {
+    private void initializeServiceAndSendData(String message) {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
             getAndroidId(new AndroidIdCallback() {
                 @Override
@@ -97,7 +97,8 @@ public class MainActivity extends AppCompatActivity {
                     requestData.setAndroidId(android_id); // FID 설정
                     requestData.setMessage(message); // 메시지 설정
 
-                    service = RetrofitClient.getClient().create(RetrofitService.class);
+//                    service = RetrofitClient.getClient().create(RetrofitService.class);
+                    RetrofitService service = RetrofitClient.getApiServiceForThird(); // 여기서 필요한 API에 맞게 설정
 
                     // 병렬로 API 호출
                     Call<ResponseData> call1 = service.requestDataFromApi1(requestData);
