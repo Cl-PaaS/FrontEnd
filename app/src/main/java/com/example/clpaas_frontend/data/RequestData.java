@@ -22,8 +22,6 @@ public class RequestData {
     @SerializedName("text")
     private String text;
 
-
-
     public RequestData() {
         this.userID = userID;
         this.text = text;

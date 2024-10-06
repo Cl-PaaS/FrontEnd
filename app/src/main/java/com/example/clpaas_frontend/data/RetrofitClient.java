@@ -33,8 +33,9 @@ public class RetrofitClient {
         // Retrofit 빌더
         return new Retrofit.Builder()
                 .baseUrl(API_URL)
+                // .baseUrl("http://clpass-base-url.com/") // API 기본 URL 값으로 수정하기
                 .client(okHttpClient)                 // OkHttpClient 적용
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(GsonConverterFactory.create(gson)) // JSON을 변환하기 위한 GSON 사용
                 .build();
     }
 }
