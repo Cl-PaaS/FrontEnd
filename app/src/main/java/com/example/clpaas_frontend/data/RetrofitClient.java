@@ -10,6 +10,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
+    //private static String RetrofitService;
 
     // API 호출 시 사용할 RetrofitService 인터페이스
 //    public static RetrofitService getApiService() {
@@ -37,18 +38,21 @@ public class RetrofitClient {
     }
     // 첫 번째 API 호출을 위한 서비스 생성
     public static RetrofitService getApiServiceForFirst() {
-        return getClient("http://backend.210-104-77-246.nip.io/check").create(RetrofitService.class);
+        String firstApiBaseUrl ="http://backend.210-104-77-246.nip.io";
+        return getClient(firstApiBaseUrl).create(RetrofitService.class);
+
     }
+
 
     // 두 번째 API 호출을 위한 서비스 생성
-    public static RetrofitService getApiServiceForSecond() {
-        return getClient("http://api2.example.com/").create(RetrofitService.class);
-    }
-
-    // 세 번째 API 호출을 위한 서비스 생성
-    public static RetrofitService getApiServiceForThird() {
-        return getClient("http://api3.example.com/").create(RetrofitService.class);
-    }
+//    public static RetrofitService getApiServiceForSecond() {
+//        return getClient("http://api2.example.com/").create(RetrofitService.class);
+//    }
+//
+//    // 세 번째 API 호출을 위한 서비스 생성
+//    public static RetrofitService getApiServiceForThird() {
+//        return getClient("http://api3.example.com/").create(RetrofitService.class);
+//    }
 }
 
 

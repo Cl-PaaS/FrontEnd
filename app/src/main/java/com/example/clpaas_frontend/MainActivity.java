@@ -1,9 +1,7 @@
 package com.example.clpaas_frontend;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.content.ContentResolver;
+
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,16 +9,14 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.clpaas_frontend.data.RequestData;
-import com.example.clpaas_frontend.data.ResponseData;
+import com.example.clpaas_frontend.data.RequestData1;
+import com.example.clpaas_frontend.data.ResponseData1;
 import com.example.clpaas_frontend.data.RetrofitClient;
 import com.example.clpaas_frontend.data.RetrofitService;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.installations.FirebaseInstallations;
 
-
-import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,7 +27,6 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -40,9 +35,9 @@ public class MainActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE = 1;
     private static final int REQUEST_CODE_READ_PHONE_STATE = 1;
     private RetrofitService service;
-    private ResponseData responseData;
+    private ResponseData1 responseData;
     private String android_id; // Class-level variable
-    private String message = "피싱 텍스트 test@naver.com 010-1234-5678 http://10.0.2.2:8080"; //피싱 텍스트
+    private String message; //피싱 텍스트
 
     // 콜백 인터페이스 정의
     interface AndroidIdCallback {
@@ -77,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == PERMISSION_REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                initializeServiceAndSendData();
+                initializeServiceAndSendData(message);
             } else {
                 Log.e("Permission Error", "READ_PHONE_STATE permission not granted");
             }
@@ -93,22 +88,24 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("유저 ID", "Received Installation ID: " + android_id);
 
                     // RequestData 객체 선언 및 FID와 message 변수를 사용하여 데이터 설정
-                    RequestData requestData = new RequestData();
-                    requestData.setAndroidId(android_id); // FID 설정
+                    RequestData1 requestData = new RequestData1();
+//                    requestData.setAndroidId(android_id); // FID 설정
                     requestData.setMessage(message); // 메시지 설정
 
-//                    service = RetrofitClient.getClient().create(RetrofitService.class);
-                    RetrofitService service = RetrofitClient.getApiServiceForThird(); // 여기서 필요한 API에 맞게 설정
+//                    service = RetrofitClient.getClient(message).create(RetrofitService.class);
+                    service = RetrofitClient.getApiServiceForFirst();
+                    //RetrofitService service = RetrofitClient.getApiServiceForThird(); // 여기서 필요한 API에 맞게 설정
+                    // RetrofitService service = RetrofitClient.getApiService();
 
                     // 병렬로 API 호출
-                    Call<ResponseData> call1 = service.requestDataFromApi1(requestData);
-                    Call<ResponseData> call2 = service.requestDataFromApi2(requestData);
-                    Call<ResponseData> call3 = service.requestDataFromApi3(requestData);
+                    Call<ResponseData1> call1 = service.requestDataFromApi1(requestData.getMessage()); //api에서 받는 요청할 때 보내는 http body값
+//                    Call<ResponseData2> call2 = service.requestDataFromApi2(requestData);
+//                    Call<ResponseData3> call3 = service.requestDataFromApi3(requestData);
 
                     // 첫 번째 API 호출
-                    call1.enqueue(new Callback<ResponseData>() {
+                    call1.enqueue(new Callback<ResponseData1>() {
                         @Override
-                        public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
+                        public void onResponse(Call<ResponseData1> call, Response<ResponseData1> response) {
                             if (response.isSuccessful() && response.body() != null) {
                                 handleApiResult(response.body(), 1);
                             } else {
@@ -117,44 +114,44 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onFailure(Call<ResponseData> call, Throwable t) {
+                        public void onFailure(Call<ResponseData1> call, Throwable t) {
                             t.printStackTrace();
                         }
                     });
 
                     // 두 번째 API 호출
-                    call2.enqueue(new Callback<ResponseData>() {
-                        @Override
-                        public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
-                            if (response.isSuccessful() && response.body() != null) {
-                                handleApiResult(response.body(), 2);
-                            } else {
-                                Log.d("API 2 응답 실패", "응답을 받지 못했습니다.");
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<ResponseData> call, Throwable t) {
-                            t.printStackTrace();
-                        }
-                    });
-
-                    // 세 번째 API 호출
-                    call3.enqueue(new Callback<ResponseData>() {
-                        @Override
-                        public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
-                            if (response.isSuccessful() && response.body() != null) {
-                                handleApiResult(response.body(), 3);
-                            } else {
-                                Log.d("API 3 응답 실패", "응답을 받지 못했습니다.");
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<ResponseData> call, Throwable t) {
-                            t.printStackTrace();
-                        }
-                    });
+//                    call2.enqueue(new Callback<ResponseData1>() {
+//                        @Override
+//                        public void onResponse(Call<ResponseData1> call, Response<ResponseData1> response) {
+//                            if (response.isSuccessful() && response.body() != null) {
+//                                handleApiResult(response.body(), 2);
+//                            } else {
+//                                Log.d("API 2 응답 실패", "응답을 받지 못했습니다.");
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onFailure(Call<ResponseData1> call, Throwable t) {
+//                            t.printStackTrace();
+//                        }
+//                    });
+//
+//                    // 세 번째 API 호출
+//                    call3.enqueue(new Callback<ResponseData1>() {
+//                        @Override
+//                        public void onResponse(Call<ResponseData1> call, Response<ResponseData1> response) {
+//                            if (response.isSuccessful() && response.body() != null) {
+//                                handleApiResult(response.body(), 3);
+//                            } else {
+//                                Log.d("API 3 응답 실패", "응답을 받지 못했습니다.");
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onFailure(Call<ResponseData1> call, Throwable t) {
+//                            t.printStackTrace();
+//                        }
+//                    });
                 }
             });
         } else {
@@ -163,9 +160,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // API 결과 처리 메서드
-    private void handleApiResult(ResponseData responseData, int apiIndex) {
-        // someData가 null인지 확인
-        boolean isPhishing = responseData.getSomeData() != null && responseData.getSomeData().equalsIgnoreCase("True");
+    private void handleApiResult(ResponseData1 responseData, int apiIndex) {
+
+        boolean isPhishing = responseData.isPhishing();
+        // null인지 확인하고 싶으면 나중에 if로 추가하기
         phishingResults[apiIndex - 1] = isPhishing; // 결과 저장
 
         Log.d("API Result", "API " + apiIndex + " - isPhishing: " + isPhishing);
@@ -180,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         runOnUiThread(() -> {
-            String logMessage = "API " + apiIndex + " 데이터: " + (responseData.getSomeData() != null ? responseData.getSomeData() : "응답 없음");
+            String logMessage = "API " + apiIndex + " 데이터: " + (responseData.isPhishing() ? responseData.isPhishing() : "응답 없음");
             Log.d("API Response", logMessage);
         });
     }
@@ -196,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
                 //ActivityCompat.requestPermissions(this, permissions, 1);
                 ActivityCompat.requestPermissions(this, permissions, PERMISSION_REQUEST_CODE);
         }else {
-            initializeServiceAndSendData();
+            initializeServiceAndSendData(message);
         }
     }
     // FID를 반환하는 메소드
