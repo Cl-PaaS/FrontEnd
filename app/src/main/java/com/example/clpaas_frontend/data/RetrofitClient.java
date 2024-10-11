@@ -36,23 +36,23 @@ public class RetrofitClient {
                 .addConverterFactory(GsonConverterFactory.create(gson)) // JSON을 변환하기 위한 GSON 사용
                 .build();
     }
-    // 첫 번째 API 호출을 위한 서비스 생성
-    public static RetrofitService getApiServiceForFirst() {
-        String firstApiBaseUrl ="http://backend.210-104-77-246.nip.io";
-        return getClient(firstApiBaseUrl).create(RetrofitService.class);
 
+    // API 호출을 위한 서비스 생성
+    public static RetrofitService getApiServiceForSpring() {
+        String springApiBaseUrl ="http://backend.210-104-77-246.nip.io";
+        return getClient(springApiBaseUrl).create(RetrofitService.class);
     }
 
+    public static RetrofitService getApiServiceForFlask() {
+        String flaskApiBaseUrl ="http://backend.210-104-77-246.nip.io/python";
+        return getClient(flaskApiBaseUrl).create(RetrofitService.class);
+    }
 
-    // 두 번째 API 호출을 위한 서비스 생성
-//    public static RetrofitService getApiServiceForSecond() {
-//        return getClient("http://api2.example.com/").create(RetrofitService.class);
-//    }
-//
 //    // 세 번째 API 호출을 위한 서비스 생성
 //    public static RetrofitService getApiServiceForThird() {
 //        return getClient("http://api3.example.com/").create(RetrofitService.class);
 //    }
+
 }
 
 

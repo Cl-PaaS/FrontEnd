@@ -100,7 +100,8 @@ public class MainActivity extends AppCompatActivity {
                     requestData.setMessage(message); // 메시지 설정
 
 //                    service = RetrofitClient.getClient(message).create(RetrofitService.class);
-                    service = RetrofitClient.getApiServiceForFirst();
+                    service = RetrofitClient.getApiServiceForSpring();
+                    service = RetrofitClient.getApiServiceForFlask();
                     //RetrofitService service = RetrofitClient.getApiServiceForThird(); // 여기서 필요한 API에 맞게 설정
                     // RetrofitService service = RetrofitClient.getApiService();
 

@@ -16,9 +16,7 @@ public class ResponseData1 {
         this.originalUrl = originalUrl;
     }
 
-    public boolean isPhishing() {
-        return isPhishing;
-    }
+    public boolean isPhishing() { return isPhishing; }
 
     public void setPhishing(boolean phishing) {
         isPhishing = phishing;
