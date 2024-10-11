@@ -8,12 +8,12 @@ public class ResponseData1 {
      * - 피싱이냐 아니냐
      * */
 
-    public String getURL() {
-        return URL;
+    public String getOriginalUrl() {
+        return originalUrl;
     }
 
-    public void setURL(String URL) {
-        this.URL = URL;
+    public void setOriginalUrl(String originalUrl) {
+        this.originalUrl = originalUrl;
     }
 
     public boolean isPhishing() {
@@ -24,8 +24,8 @@ public class ResponseData1 {
         isPhishing = phishing;
     }
 
-    @SerializedName("URL")
-    private String URL;
+    @SerializedName("originalUrl")
+    private String originalUrl;
 
     @SerializedName("isPhishing")
     private boolean isPhishing;

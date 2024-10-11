@@ -4,9 +4,11 @@ import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
+
 import android.util.Log;
 
 import android.app.NotificationChannel;
@@ -25,6 +27,8 @@ public class Clpaas_Receiver extends BroadcastReceiver {
     private static final String TAG = "Clpaas_Receiver"; //for log output
     private static final String CHANNEL_ID = "sms_channel"; //definition of alarm channel
 
+    String content;
+
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.d(TAG, "onReceive() called");
@@ -33,15 +37,23 @@ public class Clpaas_Receiver extends BroadcastReceiver {
         SmsMessage[] messages = parseSmsMessage(bundle);
 
         if (messages.length > 0) {
-            String sender = messages[0].getOriginatingAddress();
-            String content = messages[0].getMessageBody().toString();
+//            String sender = messages[0].getOriginatingAddress();
+//            content = messages[0].getMessageBody().toString();
+            String sender = intent.getStringExtra("sender");
+            String content = intent.getStringExtra("message_content");
             Date date = new Date(messages[0].getTimestampMillis());
 
-            Log.d(TAG, "보낸 사람:" + sender);
-            Log.d(TAG, "내용:" + content);
-            Log.d(TAG, "날짜:" + date);
+            Log.d("Clpaas_Receiver", "보낸 사람: " + sender);
+            Log.d("Clpaas_Receiver", "내용: " + content);
+//            Log.d(TAG, "보낸 사람:" + sender);
+//            Log.d(TAG, "내용:" + content);
+//            Log.d(TAG, "날짜:" + date);
 
-            // 알림을 생성하고 커스터마이즈
+            Intent mainIntent = new Intent(context, MainActivity.class);
+            mainIntent.putExtra("message_content", content);
+            mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(mainIntent);
+
             createNotificationChannel(context);
             if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
                 sendNotification(context, sender, content);
@@ -85,6 +97,7 @@ public class Clpaas_Receiver extends BroadcastReceiver {
         // 문자 알림 생성
         Intent intent = new Intent(context, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra("message_content", content);  // content를 인텐트에 추가
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)

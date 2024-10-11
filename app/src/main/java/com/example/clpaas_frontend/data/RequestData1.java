@@ -31,4 +31,6 @@ public class RequestData1 {
     public void setMessage(String message) {
         this.message = message;
     }
+
+
 }

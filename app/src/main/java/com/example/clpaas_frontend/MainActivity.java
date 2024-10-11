@@ -37,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
     private RetrofitService service;
     private ResponseData1 responseData;
     private String android_id; // Class-level variable
-    private String message; //피싱 텍스트
+    private String message ; //피싱 텍스트
+    //= "보내줘 [https://www.haesongsaranghae.com/]"
 
     // 콜백 인터페이스 정의
     interface AndroidIdCallback {
@@ -48,6 +49,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+
+        // 인텐트로 전달받은 message 확인
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("message_content")) {
+            message = intent.getStringExtra("message_content");
+        }
 
         View textView = findViewById(R.id.textView);
         Button sendDataButton = findViewById(R.id.sendDataButton);
@@ -98,7 +105,8 @@ public class MainActivity extends AppCompatActivity {
                     // RetrofitService service = RetrofitClient.getApiService();
 
                     // 병렬로 API 호출
-                    Call<ResponseData1> call1 = service.requestDataFromApi1(requestData.getMessage()); //api에서 받는 요청할 때 보내는 http body값
+                    Call<ResponseData1> call1 = service.requestDataFromApi1(requestData);
+//                    Call<ResponseData1> call1 = service.requestDataFromApi1(requestData.getMessage()); //api에서 받는 요청할 때 보내는 http body값
 //                    Call<ResponseData2> call2 = service.requestDataFromApi2(requestData);
 //                    Call<ResponseData3> call3 = service.requestDataFromApi3(requestData);
 
@@ -178,7 +186,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         runOnUiThread(() -> {
-            String logMessage = "API " + apiIndex + " 데이터: " + (responseData.isPhishing() ? responseData.isPhishing() : "응답 없음");
+            // responseData가 null인 경우 "응답 없음" 메시지 출력
+            String logMessage = (responseData != null)
+                    ? "API " + apiIndex + " 데이터: 응답 성공"
+                    : "API " + apiIndex + " 데이터: 응답 없음";
             Log.d("API Response", logMessage);
         });
     }
