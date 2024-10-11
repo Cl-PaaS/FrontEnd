@@ -36,18 +36,24 @@ public class Clpaas_Receiver extends BroadcastReceiver {
         Bundle bundle = intent.getExtras();
         SmsMessage[] messages = parseSmsMessage(bundle);
 
+//        if (messages.length > 0) {
+////            String sender = messages[0].getOriginatingAddress();
+////            content = messages[0].getMessageBody().toString();
+//            String sender = intent.getStringExtra("sender");
+//            String content = intent.getStringExtra("message_content");
+//            Date date = new Date(messages[0].getTimestampMillis());
+//
+//            Log.d("Clpaas_Receiver", "보낸 사람: " + sender);
+//            Log.d("Clpaas_Receiver", "내용: " + content);
+
         if (messages.length > 0) {
-//            String sender = messages[0].getOriginatingAddress();
-//            content = messages[0].getMessageBody().toString();
-            String sender = intent.getStringExtra("sender");
-            String content = intent.getStringExtra("message_content");
+            String sender = messages[0].getOriginatingAddress();
+            String content = messages[0].getMessageBody();
             Date date = new Date(messages[0].getTimestampMillis());
 
-            Log.d("Clpaas_Receiver", "보낸 사람: " + sender);
-            Log.d("Clpaas_Receiver", "내용: " + content);
-//            Log.d(TAG, "보낸 사람:" + sender);
-//            Log.d(TAG, "내용:" + content);
-//            Log.d(TAG, "날짜:" + date);
+            Log.d(TAG, "보낸 사람: " + sender);
+            Log.d(TAG, "내용: " + content);
+
 
             Intent mainIntent = new Intent(context, MainActivity.class);
             mainIntent.putExtra("message_content", content);
