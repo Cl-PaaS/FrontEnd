@@ -17,7 +17,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.installations.FirebaseInstallations;
 
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,12 +29,16 @@ import android.widget.Button;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+import java.net.URL;
+
 public class MainActivity extends AppCompatActivity {
     private boolean[] phishingResults = new boolean[3]; // 결과를 저장할 배열 추가
     private static final int PERMISSION_REQUEST_CODE = 1;
     private static final int REQUEST_CODE_READ_PHONE_STATE = 1;
     private RetrofitService service;
     private ResponseData1 responseData;
+//    private ResponseData2 responseData2;
     private String android_id; // Class-level variable
     private String message ; //피싱 텍스트
     //= "보내줘 [https://www.haesongsaranghae.com/]"
@@ -95,21 +98,26 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("유저 ID", "Received Installation ID: " + android_id);
 
                     // RequestData 객체 선언 및 FID와 message 변수를 사용하여 데이터 설정
-                    RequestData1 requestData = new RequestData1();
+                    RequestData1 requestData1 = new RequestData1();
+                    RequestData2 requestData2 = new RequestData2();
+                    RequestData3 requestData3 = new RequestData3();
 //                    requestData.setAndroidId(android_id); // FID 설정
-                    requestData.setMessage(message); // 메시지 설정
+                    requestData1.setMessage(message); // 메시지 설정
+                    requestData2.setURL(URL); // 메시지 설정
+                    requestData3.setMessage(message); // 메시지 설정
 
 //                    service = RetrofitClient.getClient(message).create(RetrofitService.class);
                     service = RetrofitClient.getApiServiceForSpring();
                     service = RetrofitClient.getApiServiceForFlask();
+                    service = RetrofitClient.getApiServiceForNestJS();
                     //RetrofitService service = RetrofitClient.getApiServiceForThird(); // 여기서 필요한 API에 맞게 설정
                     // RetrofitService service = RetrofitClient.getApiService();
 
                     // 병렬로 API 호출
-                    Call<ResponseData1> call1 = service.requestDataFromApi1(requestData);
-//                    Call<ResponseData1> call1 = service.requestDataFromApi1(requestData.getMessage()); //api에서 받는 요청할 때 보내는 http body값
-//                    Call<ResponseData2> call2 = service.requestDataFromApi2(requestData);
-//                    Call<ResponseData3> call3 = service.requestDataFromApi3(requestData);
+                    Call<ResponseData1> call1 = service.requestDataFromApi1(requestData1);
+                    Call<ResponseData1> call2 = service.requestDataFromApi2(requestData2);
+                    Call<ResponseData1> call3 = service.requestDataFromApi3(requestData3);
+//
 
                     // 첫 번째 API 호출
                     call1.enqueue(new Callback<ResponseData1>() {
