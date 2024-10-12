@@ -5,20 +5,15 @@ import com.google.gson.annotations.SerializedName;
 public class RequestData2 {
 
     // URL 필드를 JSON 객체와 매핑
-    @SerializedName("URL")
-    private String URL;
+    @SerializedName("message")
+    private String message;
 
-    public RequestData2(String URL) {
-        this.URL = URL;
+    public RequestData2() {
+        this.message = message;
     }
 
-    // URL 필드의 Getter 및 Setter
-    public String getURL() {
-        return URL;
-    }
-
-    public void setURL(String URL) {
-        this.URL = URL;
+    public void setMessage(String message) {
+        this.message = message;
     }
 }
 

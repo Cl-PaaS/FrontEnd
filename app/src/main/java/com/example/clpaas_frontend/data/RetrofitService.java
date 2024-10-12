@@ -15,8 +15,8 @@ public interface RetrofitService {
     Call<ResponseData1> requestDataFromApi1(@Body RequestData1 data);
 
     // flask api
-    @GET("/check-url")
-    Call<ResponseData2> requestDataFromApi2(@Query("url") String url);
+    @POST("/check-url")
+    Call<ResponseData2> requestDataFromApi2(@Body RequestData2 data);
 
     // NestJS api
     @POST("/nest/validator")

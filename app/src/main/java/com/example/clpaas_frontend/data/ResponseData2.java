@@ -4,26 +4,18 @@ import com.google.gson.annotations.SerializedName;
 
 public class ResponseData2 {
 
-    // Getter methods
-    public String getURL() {
-        return URL;
-    }
+    @SerializedName("isPhishing")
+    private boolean isPhishing;
 
-    public void setUrl(String URL) {
-        this.URL= URL;
+    public ResponseData2() {
+        // 기본 생성자
     }
 
     public boolean isPhishing() {
         return isPhishing;
     }
 
-    public void setPhishing(boolean phishing) {
-        isPhishing = phishing;
+    public void setPhishing(boolean isPhishing) {
+        this.isPhishing = isPhishing;
     }
-
-    @SerializedName("URL")
-    private String URL;
-
-    @SerializedName("isPhishing")
-    private boolean isPhishing;
 }

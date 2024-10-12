@@ -10,7 +10,13 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.clpaas_frontend.data.RequestData1;
+import com.example.clpaas_frontend.data.RequestData2;
+import com.example.clpaas_frontend.data.RequestData3;
+
 import com.example.clpaas_frontend.data.ResponseData1;
+import com.example.clpaas_frontend.data.ResponseData2;
+import com.example.clpaas_frontend.data.ResponseData3;
+
 import com.example.clpaas_frontend.data.RetrofitClient;
 import com.example.clpaas_frontend.data.RetrofitService;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -103,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                     RequestData3 requestData3 = new RequestData3();
 //                    requestData.setAndroidId(android_id); // FID 설정
                     requestData1.setMessage(message); // 메시지 설정
-                    requestData2.setURL(URL); // 메시지 설정
+                    requestData2.setMessage(message); // 메시지 설정
                     requestData3.setMessage(message); // 메시지 설정
 
 //                    service = RetrofitClient.getClient(message).create(RetrofitService.class);
@@ -115,8 +121,8 @@ public class MainActivity extends AppCompatActivity {
 
                     // 병렬로 API 호출
                     Call<ResponseData1> call1 = service.requestDataFromApi1(requestData1);
-                    Call<ResponseData1> call2 = service.requestDataFromApi2(requestData2);
-                    Call<ResponseData1> call3 = service.requestDataFromApi3(requestData3);
+                    Call<ResponseData2> call2 = service.requestDataFromApi2(requestData2);
+                    Call<ResponseData3> call3 = service.requestDataFromApi3(requestData3);
 //
 
                     // 첫 번째 API 호출
@@ -137,38 +143,38 @@ public class MainActivity extends AppCompatActivity {
                     });
 
                     // 두 번째 API 호출
-//                    call2.enqueue(new Callback<ResponseData1>() {
-//                        @Override
-//                        public void onResponse(Call<ResponseData1> call, Response<ResponseData1> response) {
-//                            if (response.isSuccessful() && response.body() != null) {
-//                                handleApiResult(response.body(), 2);
-//                            } else {
-//                                Log.d("API 2 응답 실패", "응답을 받지 못했습니다.");
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onFailure(Call<ResponseData1> call, Throwable t) {
-//                            t.printStackTrace();
-//                        }
-//                    });
+                    call2.enqueue(new Callback<ResponseData2>() {
+                        @Override
+                        public void onResponse(Call<ResponseData2> call, Response<ResponseData2> response) {
+                            if (response.isSuccessful() && response.body() != null) {
+                                handleApiResult(response.body(), 2);
+                            } else {
+                                Log.d("API 2 응답 실패", "응답을 받지 못했습니다.");
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseData2> call, Throwable t) {
+                            t.printStackTrace();
+                        }
+                    });
 //
 //                    // 세 번째 API 호출
-//                    call3.enqueue(new Callback<ResponseData1>() {
-//                        @Override
-//                        public void onResponse(Call<ResponseData1> call, Response<ResponseData1> response) {
-//                            if (response.isSuccessful() && response.body() != null) {
-//                                handleApiResult(response.body(), 3);
-//                            } else {
-//                                Log.d("API 3 응답 실패", "응답을 받지 못했습니다.");
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onFailure(Call<ResponseData1> call, Throwable t) {
-//                            t.printStackTrace();
-//                        }
-//                    });
+                    call3.enqueue(new Callback<ResponseData3>() {
+                        @Override
+                        public void onResponse(Call<ResponseData3> call, Response<ResponseData3> response) {
+                            if (response.isSuccessful() && response.body() != null) {
+                                handleApiResult(response.body(), 3);
+                            } else {
+                                Log.d("API 3 응답 실패", "응답을 받지 못했습니다.");
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseData3> call, Throwable t) {
+                            t.printStackTrace();
+                        }
+                    });
                 }
             });
         } else {
@@ -177,22 +183,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // API 결과 처리 메서드
-    private void handleApiResult(ResponseData1 responseData, int apiIndex) {
+    private void handleApiResult(Object responseData, int apiIndex) {
+        boolean isPhishing = false;
 
-        boolean isPhishing = responseData.isPhishing();
-        // null인지 확인하고 싶으면 나중에 if로 추가하기
+        // 응답 객체 타입에 따라 처리
+        if (responseData instanceof ResponseData1) {
+            isPhishing = ((ResponseData1) responseData).isPhishing();
+        } else if (responseData instanceof ResponseData2) {
+            isPhishing = ((ResponseData2) responseData).isPhishing();
+        } else if (responseData instanceof ResponseData3) {
+            isPhishing = ((ResponseData3) responseData).isPhishing();
+        }
+
         phishingResults[apiIndex - 1] = isPhishing; // 결과 저장
-
         Log.d("API Result", "API " + apiIndex + " - isPhishing: " + isPhishing);
 
-        // 추가 로직: 모든 API 응답을 받은 후 처리할 로직을 여기에 추가
-        // 모든 API 호출이 완료된 후 결과를 처리
-        if (apiIndex == 3) {
-            // ResultActivity로 결과 전달
-            Intent intent = new Intent(MainActivity.this, ResultActivity.class);
-            intent.putExtra("results", phishingResults); // 결과 배열 전달
-            startActivity(intent);
-        }
+        // 모든 API 응답 처리 완료 체크
+        checkAllApisCompleted(apiIndex);
 
         runOnUiThread(() -> {
             // responseData가 null인 경우 "응답 없음" 메시지 출력
@@ -201,6 +208,16 @@ public class MainActivity extends AppCompatActivity {
                     : "API " + apiIndex + " 데이터: 응답 없음";
             Log.d("API Response", logMessage);
         });
+
+    }
+
+    private void checkAllApisCompleted(int apiIndex) {
+        if (apiIndex == 3) {
+            // 모든 API 호출이 완료된 후 결과를 처리
+            Intent intent = new Intent(MainActivity.this, ResultActivity.class);
+            intent.putExtra("results", phishingResults); // 결과 배열 전달
+            startActivity(intent);
+        }
     }
 
     // 권한 없을 경우 요청하는 함수

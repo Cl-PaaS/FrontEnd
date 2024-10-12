@@ -10,10 +10,6 @@ public class RequestData1 {
         this.message = message;
     } // 이 값을 api에 따라 바꾸기
 
-    public String getMessage() {
-        return message;
-    }
-
     public void setMessage(String message) {
         this.message = message;
     }
