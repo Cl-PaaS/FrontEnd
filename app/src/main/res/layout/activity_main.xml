@@ -13,19 +13,21 @@
         android:layout_height="21dp"
         android:src="@drawable/nugushow_white1"
         tools:layout_editor_absoluteX="20dp"
-        tools:layout_editor_absoluteY="50dp" />
+        tools:layout_editor_absoluteY="50dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/mainDescriptionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="left"
-        android:text="땡땡님, 지금까지 \n12번 만큼 \n폰을 지켰어요!"
+        android:text="해송님, 지금까지 \n10번 만큼 \n폰을 지켰어요!"
         android:textColor="#FFFFFF"
         android:textSize="28sp"
         android:layout_marginTop="8dp"
         tools:layout_editor_absoluteX="32dp"
-        tools:layout_editor_absoluteY="107dp" />
+        tools:layout_editor_absoluteY="107dp"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/smallLockIcon"
@@ -33,7 +35,8 @@
         android:layout_height="20dp"
         android:src="@drawable/small_lockin"
         tools:layout_editor_absoluteX="40dp"
-        tools:layout_editor_absoluteY="260dp" />
+        tools:layout_editor_absoluteY="260dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/hashTagTextView"
@@ -47,7 +50,8 @@
         android:textSize="18sp"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="32dp"
-        tools:layout_editor_absoluteY="248dp" />
+        tools:layout_editor_absoluteY="248dp"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/lockIcon"
@@ -55,7 +59,8 @@
         android:layout_height="195dp"
         android:src="@drawable/lockin"
         tools:layout_editor_absoluteX="224dp"
-        tools:layout_editor_absoluteY="248dp" />
+        tools:layout_editor_absoluteY="228dp"
+        tools:ignore="MissingConstraints" />
 
 
     <androidx.cardview.widget.CardView
@@ -65,7 +70,8 @@
         app:cardCornerRadius="17dp"
         app:cardElevation="4dp"
         tools:layout_editor_absoluteX="70dp"
-        tools:layout_editor_absoluteY="450dp">
+        tools:layout_editor_absoluteY="410dp"
+        tools:ignore="MissingConstraints">
 
         <!-- 내부 ConstraintLayout -->
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -133,7 +139,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         tools:layout_editor_absoluteX="186dp"
-        tools:layout_editor_absoluteY="762dp">
+        tools:layout_editor_absoluteY="762dp"
+        tools:ignore="MissingConstraints">
 
     </LinearLayout>
 
@@ -142,5 +149,6 @@
         android:layout_height="40dp"
         android:src="@drawable/indicator"
         tools:layout_editor_absoluteX="184dp"
-        tools:layout_editor_absoluteY="792dp" />
+        tools:layout_editor_absoluteY="742dp"
+        tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>
