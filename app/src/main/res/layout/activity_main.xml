@@ -7,24 +7,13 @@
     android:background="#4C6EE5"
     tools:layout_editor_absoluteY="25dp">
 
-    <!-- Title -->
-
-    <!-- Description -->
-
-    <!-- Hashtag -->
-
-    <!-- Lock Icon -->
-    <TextView
-        android:id="@+id/mainTitleTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/hssantokki_regular"
-        android:gravity="center"
-        android:text="누구쇼?"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        tools:layout_editor_absoluteX="32dp"
-        tools:layout_editor_absoluteY="48dp" />
+    <ImageView
+        android:id="@+id/mainTitleTextImage"
+        android:layout_width="100dp"
+        android:layout_height="21dp"
+        android:src="@drawable/nugushow_white1"
+        tools:layout_editor_absoluteX="20dp"
+        tools:layout_editor_absoluteY="50dp" />
 
     <TextView
         android:id="@+id/mainDescriptionTextView"
@@ -38,7 +27,14 @@
         tools:layout_editor_absoluteX="32dp"
         tools:layout_editor_absoluteY="107dp" />
 
-    <!-- Card View -->
+    <ImageView
+        android:id="@+id/smallLockIcon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/small_lockin"
+        tools:layout_editor_absoluteX="40dp"
+        tools:layout_editor_absoluteY="260dp" />
+
     <TextView
         android:id="@+id/hashTagTextView"
         android:layout_width="wrap_content"
@@ -46,9 +42,10 @@
         android:background="@drawable/tag_background"
         android:gravity="center"
         android:padding="8dp"
-        android:text="#폰지키미"
+        android:text="    #폰지키미"
         android:textColor="#FFFFFF"
-        android:textSize="17sp"
+        android:textSize="18sp"
+        android:textStyle="bold"
         tools:layout_editor_absoluteX="32dp"
         tools:layout_editor_absoluteY="248dp" />
 
@@ -59,6 +56,7 @@
         android:src="@drawable/lockin"
         tools:layout_editor_absoluteX="224dp"
         tools:layout_editor_absoluteY="248dp" />
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card1"
@@ -101,10 +99,6 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cardTitleTextView" />
-
-            <!-- 이미지 -->
-
-            <!-- 검사 시작 버튼 -->
 
             <ImageView
                 android:id="@+id/messageImageView"
