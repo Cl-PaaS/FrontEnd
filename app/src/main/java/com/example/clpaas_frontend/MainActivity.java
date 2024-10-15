@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         View textView = findViewById(R.id.textView);
-        Button sendDataButton = findViewById(R.id.sendDataButton);
+        Button sendDataButton = findViewById(R.id.startButton);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,7 +8,7 @@
     android:background="#4C6EE5"
     tools:layout_editor_absoluteY="25dp">
 
-    <!-- Title and Description -->
+    <!-- Title -->
     <TextView
         android:id="@+id/mainTitleTextView"
         android:layout_width="wrap_content"
@@ -17,22 +18,12 @@
         android:text="누구쇼?"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="50dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="50dp" />
 
-    <!--    <ImageView-->
-    <!--        android:id="@+id/mainTitleImageView"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginStart="30dp"-->
-    <!--        android:layout_marginTop="50dp"-->
-    <!--        android:src="@drawable/nugushow_white"-->
-    <!--        android:gravity="center"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.0"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent" />-->
-
+    <!-- Description -->
     <TextView
         android:id="@+id/mainDescriptionTextView"
         android:layout_width="wrap_content"
@@ -41,11 +32,12 @@
         android:text="땡땡님, 지금까지 \n12번 만큼 \n폰을 지켰어요!"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="100dp" />
+        app:layout_constraintTop_toBottomOf="@id/mainTitleTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
 
-    <!-- Card View for Message Check -->
-
+    <!-- Hashtag -->
     <TextView
         android:id="@+id/hashTagTextView"
         android:layout_width="wrap_content"
@@ -56,52 +48,41 @@
         android:text="#폰지키미"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="231dp" />
+        app:layout_constraintTop_toBottomOf="@id/mainDescriptionTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="16dp" />
 
+    <!-- Lock Icon -->
     <ImageView
         android:id="@+id/lockIcon"
         android:layout_width="170dp"
         android:layout_height="146dp"
         android:src="@drawable/lockin"
-        tools:layout_editor_absoluteX="226dp"
-        tools:layout_editor_absoluteY="253dp" />
+        app:layout_constraintTop_toBottomOf="@id/hashTagTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp" />
 
+    <!-- Card View -->
     <androidx.cardview.widget.CardView
         android:id="@+id/card1"
         android:layout_width="230dp"
         android:layout_height="287dp"
         app:cardCornerRadius="17dp"
         app:cardElevation="4dp"
-        tools:layout_editor_absoluteX="91dp"
-        tools:layout_editor_absoluteY="458dp">
+        app:layout_constraintTop_toBottomOf="@id/lockIcon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp">
 
         <!-- 내부 ConstraintLayout -->
-
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="260dp"
-            android:layout_height="306dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:padding="16dp">
 
-            <!-- 텍스트 제목 -->
-
-            <!-- 설명 텍스트 -->
-
-            <!-- 이미지 -->
-
-            <!-- 검사 시작 버튼 -->
-
-            <TextView
-                android:id="@+id/cardDescriptionTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="피싱 메시지 검사하기"
-                android:textColor="#777777"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                tools:layout_editor_absoluteX="2dp"
-                tools:layout_editor_absoluteY="53dp" />
-
+            <!-- 카드 제목 -->
             <TextView
                 android:id="@+id/cardTitleTextView"
                 android:layout_width="wrap_content"
@@ -110,9 +91,33 @@
                 android:textColor="#333333"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="7dp" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
+            <!-- 카드 설명 -->
+            <TextView
+                android:id="@+id/cardDescriptionTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="피싱 메시지 검사하기"
+                android:textColor="#777777"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/cardTitleTextView"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="8dp" />
+
+            <!-- 이미지 -->
+            <ImageView
+                android:id="@+id/messageImageView"
+                android:layout_width="80dp"
+                android:layout_height="77dp"
+                android:src="@drawable/message_icon"
+                app:layout_constraintTop_toBottomOf="@id/cardDescriptionTextView"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="16dp" />
+
+            <!-- 검사 시작 버튼 -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/startButton"
                 android:layout_width="match_parent"
@@ -121,16 +126,9 @@
                 android:textColor="#FFFFFF"
                 android:textStyle="bold"
                 app:backgroundTint="#F57171"
-                tools:layout_editor_absoluteX="-79dp"
-                tools:layout_editor_absoluteY="205dp" />
-
-            <ImageView
-                android:id="@+id/messageImageView"
-                android:layout_width="80dp"
-                android:layout_height="77dp"
-                android:src="@drawable/message_icon"
-                tools:layout_editor_absoluteX="61dp"
-                tools:layout_editor_absoluteY="103dp" />
+                app:layout_constraintTop_toBottomOf="@id/messageImageView"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="16dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
@@ -140,8 +138,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteX="186dp"
-        tools:layout_editor_absoluteY="785dp">
+        app:layout_constraintTop_toBottomOf="@id/card1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp">
 
         <ImageView
             android:layout_width="40dp"
