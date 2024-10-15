@@ -4,79 +4,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#4C6EE5">
+    android:background="#4C6EE5"
+    tools:layout_editor_absoluteY="25dp">
 
     <!-- Title and Description -->
     <TextView
         android:id="@+id/mainTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="50dp"
         android:fontFamily="@font/hssantokki_regular"
         android:gravity="center"
         android:text="누구쇼?"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="50dp" />
 
-<!--    <ImageView-->
-<!--        android:id="@+id/mainTitleImageView"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="30dp"-->
-<!--        android:layout_marginTop="50dp"-->
-<!--        android:src="@drawable/nugushow_white"-->
-<!--        android:gravity="center"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.0"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+    <!--    <ImageView-->
+    <!--        android:id="@+id/mainTitleImageView"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="30dp"-->
+    <!--        android:layout_marginTop="50dp"-->
+    <!--        android:src="@drawable/nugushow_white"-->
+    <!--        android:gravity="center"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.0"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <TextView
         android:id="@+id/mainDescriptionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
         android:gravity="left"
         android:text="땡땡님, 지금까지 \n12번 만큼 \n폰을 지켰어요!"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.106"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainTitleTextView" />
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="100dp" />
+
+    <!-- Card View for Message Check -->
 
     <TextView
         android:id="@+id/hashTagTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:background="@drawable/tag_background"
         android:gravity="center"
         android:padding="8dp"
         android:text="#폰지키미"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.092"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainDescriptionTextView" />
-
-    <!-- Card View for Message Check -->
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="231dp" />
 
     <ImageView
         android:id="@+id/lockIcon"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:layout_marginStart="144dp"
-        android:layout_marginBottom="10dp"
+        android:layout_width="170dp"
+        android:layout_height="146dp"
         android:src="@drawable/lockin"
-        app:layout_constraintBottom_toBottomOf="@+id/hashTagTextView"
-        app:layout_constraintStart_toEndOf="@+id/hashTagTextView" />
+        tools:layout_editor_absoluteX="226dp"
+        tools:layout_editor_absoluteY="253dp" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card1"
@@ -84,71 +73,64 @@
         android:layout_height="287dp"
         app:cardCornerRadius="17dp"
         app:cardElevation="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/pageIndicator"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="40dp">
+        tools:layout_editor_absoluteX="91dp"
+        tools:layout_editor_absoluteY="458dp">
 
         <!-- 내부 ConstraintLayout -->
+
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="230dp"
-            android:layout_height="287dp"
+            android:layout_width="260dp"
+            android:layout_height="306dp"
             android:padding="16dp">
 
             <!-- 텍스트 제목 -->
-            <TextView
-                android:id="@+id/cardTitleTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="메시지 검사"
-                android:textStyle="bold"
-                android:textColor="#333333"
-                android:textSize="20sp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
 
             <!-- 설명 텍스트 -->
-            <TextView
-                android:id="@+id/cardDescriptionTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="75dp"
-                android:text="피싱 메시지 검사하기"
-                android:textStyle="bold"
-                android:textColor="#777777"
-                android:textSize="14sp"
-                app:layout_constraintTop_toBottomOf="@+id/cardTitleTextView"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
 
             <!-- 이미지 -->
 
             <!-- 검사 시작 버튼 -->
 
-            <ImageView
-                android:id="@+id/messageImageView"
-                android:layout_width="80dp"
-                android:layout_height="77dp"
-                android:layout_marginTop="28dp"
-                android:src="@drawable/message_icon"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardDescriptionTextView" />
+            <TextView
+                android:id="@+id/cardDescriptionTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="피싱 메시지 검사하기"
+                android:textColor="#777777"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:layout_editor_absoluteX="2dp"
+                tools:layout_editor_absoluteY="53dp" />
+
+            <TextView
+                android:id="@+id/cardTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="메시지 검사"
+                android:textColor="#333333"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="7dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/startButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
                 android:text="검사 시작하기"
-                android:textStyle="bold"
                 android:textColor="#FFFFFF"
+                android:textStyle="bold"
                 app:backgroundTint="#F57171"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                tools:layout_editor_absoluteX="-79dp"
+                tools:layout_editor_absoluteY="205dp" />
 
+            <ImageView
+                android:id="@+id/messageImageView"
+                android:layout_width="80dp"
+                android:layout_height="77dp"
+                android:src="@drawable/message_icon"
+                tools:layout_editor_absoluteX="61dp"
+                tools:layout_editor_absoluteY="103dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
@@ -158,21 +140,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        tools:layout_editor_absoluteX="186dp"
+        tools:layout_editor_absoluteY="785dp">
 
         <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/indicator" />
-
-        <ImageView
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:src="@drawable/indicator_inactive"
-            android:layout_marginStart="4dp"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
