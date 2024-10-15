@@ -118,8 +118,9 @@
                 android:text="검사 시작하기"
                 android:textColor="#FFFFFF"
                 android:textSize="17sp"
-                c
+                android:textStyle="bold"
                 app:backgroundTint="#F57171"
+                app:cornerRadius="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/messageImageView" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -142,5 +143,4 @@
         android:src="@drawable/indicator"
         tools:layout_editor_absoluteX="184dp"
         tools:layout_editor_absoluteY="792dp" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

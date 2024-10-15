@@ -1,5 +1,6 @@
 package com.example.clpaas_frontend;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -29,9 +30,13 @@ import retrofit2.Response;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.content.Intent;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -81,6 +86,21 @@ public class MainActivity extends AppCompatActivity {
                 requirePerms();  // Ensure permissions are checked
             }
         });
+        TextView descriptionTextView = findViewById(R.id.mainDescriptionTextView);
+
+        String text = "땡땡님, 지금까지 \n12번 만큼 \n폰을 지켰어요!";
+        SpannableString spannable = new SpannableString(text);
+
+        // "땡땡" 부분을 굵게 설정
+        spannable.setSpan(new StyleSpan(Typeface.BOLD), 0, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        // "12번" 부분을 굵게 설정
+        spannable.setSpan(new StyleSpan(Typeface.BOLD), 10, 13, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        // "만" 부분을 굵게 설정
+        spannable.setSpan(new StyleSpan(Typeface.BOLD), 15, 16, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        descriptionTextView.setText(spannable);
     }
 
     @Override
@@ -252,5 +272,4 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
     }
-
 }
