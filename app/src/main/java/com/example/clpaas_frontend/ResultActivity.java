@@ -10,7 +10,7 @@ public class ResultActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_result);
+        setContentView(R.layout.activity_result_safe);
 
         TextView resultTextView = findViewById(R.id.resultTextView);
         TextView scoreTextView = findViewById(R.id.scoreTextView); // 안전 점수를 출력할 TextView

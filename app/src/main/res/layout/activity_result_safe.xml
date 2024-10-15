@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F4F8"
+    tools:context=".ResultActivity">
+
+    <ImageView
+        android:id="@+id/resultTitleTextImage"
+        android:layout_width="100dp"
+        android:layout_height="21dp"
+        android:src="@drawable/nugushow_blue"
+        tools:layout_editor_absoluteX="20dp"
+        tools:layout_editor_absoluteY="50dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/subtitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="해송님의 문자 진단 결과예요."
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:textSize="26sp"
+        tools:layout_editor_absoluteX="33dp"
+        tools:layout_editor_absoluteY="102dp"
+        tools:ignore="MissingConstraints" />
+
+    <LinearLayout
+        android:id="@+id/resultBox"
+        android:layout_width="400dp"
+        android:layout_height="222dp"
+
+        android:padding="16dp"
+        android:orientation="vertical"
+        android:background="@drawable/rounded_box"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="169dp"
+        tools:ignore="MissingConstraints">
+
+        <!-- Message Safety Score (TextView on top, left-aligned) -->
+        <TextView
+            android:id="@+id/scoreSafeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="문자 안전 점수"
+            android:textColor="#333333"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_gravity="start"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"/>
+
+        <!-- Horizontal Layout for Emoji and Texts -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="40dp">
+
+            <!-- Emoji Image -->
+            <ImageView
+                android:id="@+id/emojiImageView"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:src="@drawable/result_100"
+                android:layout_marginEnd="16dp" />
+
+            <!-- Vertical Layout for Score, Icons, and Safe Message -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
+
+                <!-- Horizontal Layout for Score and Result Text -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- Score Text -->
+                    <TextView
+                        android:id="@+id/scoreTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="90%"
+                        android:fontFamily="sans-serif-black"
+                        android:textColor="#333333"
+                        android:textSize="48sp"
+                        android:textStyle="bold" />
+
+                    <!-- Result Text (Right of Score) -->
+                    <TextView
+                        android:id="@+id/resultTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="/좋음"
+                        android:textColor="#8A8A8A"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="10dp"/>
+                </LinearLayout>
+
+                <!-- Icons Layout -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp">
+
+                    <ImageView
+                        android:id="@+id/mark1ImageView"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/bluemark"
+                        android:layout_marginEnd="8dp" />
+
+                    <ImageView
+                        android:id="@+id/mark2ImageView"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/bluemark"
+                        android:layout_marginEnd="8dp" />
+
+                    <ImageView
+                        android:id="@+id/mark3ImageView"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/greymark" />
+                </LinearLayout>
+
+                <!-- Safe Message Text -->
+                <TextView
+                    android:id="@+id/safeMessageTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="해당 문자는 안전해요."
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="start"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/checkAnotherButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="다른 메시지 검사하기"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:padding="10dp"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:backgroundTint="#407FFF"
+        app:cornerRadius="8dp"
+        tools:layout_editor_absoluteX="103dp"
+        tools:layout_editor_absoluteY="420dp"
+        tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
