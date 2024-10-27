@@ -49,10 +49,9 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_READ_PHONE_STATE = 1;
     private RetrofitService service;
     private ResponseData1 responseData;
-//    private ResponseData2 responseData2;
+    private ResponseData2 responseData2;
     private String android_id; // Class-level variable
     private String message ; //피싱 텍스트
-    //= "보내줘 [https://www.haesongsaranghae.com/]"
 
     // 콜백 인터페이스 정의
     interface AndroidIdCallback {
@@ -70,10 +69,10 @@ public class MainActivity extends AppCompatActivity {
             message = intent.getStringExtra("message_content");
         }
 
-        View textView = findViewById(R.id.textView);
+        TextView descriptionTextView = findViewById(R.id.mainDescriptionTextView);
         Button sendDataButton = findViewById(R.id.startButton);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.mainTitleTextImage), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
@@ -86,7 +85,8 @@ public class MainActivity extends AppCompatActivity {
                 requirePerms();  // Ensure permissions are checked
             }
         });
-        TextView descriptionTextView = findViewById(R.id.mainDescriptionTextView);
+
+//        TextView descriptionTextView = findViewById(R.id.mainDescriptionTextView);
 
         String text = "해송님, 지금까지 \n10번 만큼 \n폰을 지켰어요!";
         SpannableString spannable = new SpannableString(text);
