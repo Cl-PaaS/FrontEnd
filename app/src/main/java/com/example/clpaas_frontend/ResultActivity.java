@@ -1,6 +1,9 @@
 package com.example.clpaas_frontend;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ResultActivity extends AppCompatActivity {
@@ -29,6 +32,17 @@ public class ResultActivity extends AppCompatActivity {
                 setContentView(R.layout.activity_result_mid); // 기본값으로 안전 화면 설정
                 break;
         }
+
+        // checkAnotherButton 클릭 리스너 추가
+        Button checkAnotherButton = findViewById(R.id.checkAnotherButton);
+        checkAnotherButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ResultActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish(); // ResultActivity 종료
+            }
+        });
     }
 
     // True 개수를 반환하는 메서드
