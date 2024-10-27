@@ -44,11 +44,11 @@ public class RetrofitClient {
     }
 
     public static RetrofitService getApiServiceForFlask() {
-        String flaskApiBaseUrl ="http://backend.210-104-77-246.nip.io/python";
+        String flaskApiBaseUrl ="http://backend.210-104-77-246.nip.io";
         return getClient(flaskApiBaseUrl).create(RetrofitService.class);
     }
 
-//    // 세 번째 API 호출을 위한 서비스 생성
+    // 세 번째 API 호출을 위한 서비스 생성
     public static RetrofitService getApiServiceForNestJS() {
         String nestJsBaseUrl = "http://backend.210-104-77-246.nip.io";
         return getClient(nestJsBaseUrl).create(RetrofitService.class);
