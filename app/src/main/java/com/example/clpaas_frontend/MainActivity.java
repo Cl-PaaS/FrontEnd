@@ -60,13 +60,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+//        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
         // 인텐트로 전달받은 message 확인
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra("message_content")) {
             message = intent.getStringExtra("message_content");
+            initializeServiceAndSendData(message);  // API 호출 메서드
         }
 
         TextView descriptionTextView = findViewById(R.id.mainDescriptionTextView);
@@ -103,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
         descriptionTextView.setText(spannable);
     }
 
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -136,7 +138,6 @@ public class MainActivity extends AppCompatActivity {
                     service = RetrofitClient.getApiServiceForSpring();
                     service = RetrofitClient.getApiServiceForFlask();
                     service = RetrofitClient.getApiServiceForNestJS();
-                    //RetrofitService service = RetrofitClient.getApiServiceForThird(); // 여기서 필요한 API에 맞게 설정
                     // RetrofitService service = RetrofitClient.getApiService();
 
                     // 병렬로 API 호출
@@ -152,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
                             if (response.isSuccessful() && response.body() != null) {
                                 handleApiResult(response.body(), 1);
                             } else {
-                                Log.d("API 1 응답 실패", "응답을 받지 못했습니다.");
+              Log.d("API 1 응답 실패", "응답을 받지 못했습니다.");
                             }
                         }
 

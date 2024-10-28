@@ -29,22 +29,43 @@ public class Clpaas_Receiver extends BroadcastReceiver {
 
     String content;
 
+//    @Override
+//    public void onReceive(Context context, Intent intent) {
+//        Log.d(TAG, "onReceive() called");
+//
+//        Bundle bundle = intent.getExtras();
+//        SmsMessage[] messages = parseSmsMessage(bundle);
+//
+//        if (messages.length > 0) {
+//            String sender = messages[0].getOriginatingAddress();
+//            String content = messages[0].getMessageBody();
+//            Date date = new Date(messages[0].getTimestampMillis());
+//
+//            Log.d(TAG, "보낸 사람: " + sender);
+//            Log.d(TAG, "내용: " + content);
+//
+//
+//            Intent mainIntent = new Intent(context, MainActivity.class);
+//            mainIntent.putExtra("message_content", content);
+//            mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            context.startActivity(mainIntent);
+//
+//            createNotificationChannel(context);
+//            if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+//                sendNotification(context, sender, content);
+//            } else {
+//                Log.d(TAG, "알림 권한이 없습니다.");
+//                // 권한 요청
+//                requestNotificationPermission(context);
+//            }
+//        }
+//    }
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.d(TAG, "onReceive() called");
 
         Bundle bundle = intent.getExtras();
         SmsMessage[] messages = parseSmsMessage(bundle);
-
-//        if (messages.length > 0) {
-////            String sender = messages[0].getOriginatingAddress();
-////            content = messages[0].getMessageBody().toString();
-//            String sender = intent.getStringExtra("sender");
-//            String content = intent.getStringExtra("message_content");
-//            Date date = new Date(messages[0].getTimestampMillis());
-//
-//            Log.d("Clpaas_Receiver", "보낸 사람: " + sender);
-//            Log.d("Clpaas_Receiver", "내용: " + content);
 
         if (messages.length > 0) {
             String sender = messages[0].getOriginatingAddress();
@@ -54,10 +75,10 @@ public class Clpaas_Receiver extends BroadcastReceiver {
             Log.d(TAG, "보낸 사람: " + sender);
             Log.d(TAG, "내용: " + content);
 
-
+            // MainActivity로 문자 내용 전달
             Intent mainIntent = new Intent(context, MainActivity.class);
             mainIntent.putExtra("message_content", content);
-            mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             context.startActivity(mainIntent);
 
             createNotificationChannel(context);
@@ -65,11 +86,11 @@ public class Clpaas_Receiver extends BroadcastReceiver {
                 sendNotification(context, sender, content);
             } else {
                 Log.d(TAG, "알림 권한이 없습니다.");
-                // 권한 요청
                 requestNotificationPermission(context);
             }
         }
     }
+
 
     private SmsMessage[] parseSmsMessage(Bundle bundle) {
         //PDU: Protocol Data Units
