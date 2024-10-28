@@ -98,9 +98,6 @@ public class MainActivity extends AppCompatActivity {
         // "12번" 부분을 굵게 설정
         spannable.setSpan(new StyleSpan(Typeface.BOLD), 10, 13, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-        // "만" 부분을 굵게 설정
-        spannable.setSpan(new StyleSpan(Typeface.BOLD), 15, 16, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
         descriptionTextView.setText(spannable);
     }
 
