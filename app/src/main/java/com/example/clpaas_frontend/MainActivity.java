@@ -135,16 +135,23 @@ public class MainActivity extends AppCompatActivity {
                     requestData3.setMessage(message); // 메시지 설정
 
 //                    service = RetrofitClient.getClient(message).create(RetrofitService.class);
-                    service = RetrofitClient.getApiServiceForSpring();
-                    service = RetrofitClient.getApiServiceForFlask();
-                    service = RetrofitClient.getApiServiceForNestJS();
-                    // RetrofitService service = RetrofitClient.getApiService();
+//                    service = RetrofitClient.getApiServiceForSpring();
+//                    service = RetrofitClient.getApiServiceForFlask();
+//                    service = RetrofitClient.getApiServiceForNestJS();
+
+                    // RetrofitService 인스턴스 생성 수정
+                    RetrofitService service1 = RetrofitClient.getApiServiceForSpring();
+                    RetrofitService service2 = RetrofitClient.getApiServiceForFlask();
+                    RetrofitService service3 = RetrofitClient.getApiServiceForNestJS();
 
                     // 병렬로 API 호출
-                    Call<ResponseData1> call1 = service.requestDataFromApi1(requestData1);
-                    Call<ResponseData2> call2 = service.requestDataFromApi2(requestData2);
-                    Call<ResponseData3> call3 = service.requestDataFromApi3(requestData3);
-//
+//                    Call<ResponseData1> call1 = service.requestDataFromApi1(requestData1);
+//                    Call<ResponseData2> call2 = service.requestDataFromApi2(requestData2);
+//                    Call<ResponseData3> call3 = service.requestDataFromApi3(requestData3);
+
+                    Call<ResponseData1> call1 = service1.requestDataFromApi1(requestData1);
+                    Call<ResponseData2> call2 = service2.requestDataFromApi2(requestData2);
+                    Call<ResponseData3> call3 = service3.requestDataFromApi3(requestData3);
 
                     // 첫 번째 API 호출
                     call1.enqueue(new Callback<ResponseData1>() {
