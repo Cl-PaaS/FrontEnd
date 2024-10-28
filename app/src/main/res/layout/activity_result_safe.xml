@@ -12,9 +12,10 @@
         android:layout_width="100dp"
         android:layout_height="21dp"
         android:src="@drawable/nugushow_blue"
-        tools:layout_editor_absoluteX="20dp"
-        tools:layout_editor_absoluteY="50dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp" />
 
     <TextView
         android:id="@+id/subtitleTextView"
@@ -24,23 +25,23 @@
         android:textStyle="bold"
         android:textColor="#333333"
         android:textSize="26sp"
-        tools:layout_editor_absoluteX="33dp"
-        tools:layout_editor_absoluteY="102dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/resultTitleTextImage"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="10dp" />
 
     <LinearLayout
         android:id="@+id/resultBox"
         android:layout_width="400dp"
         android:layout_height="222dp"
-
         android:padding="16dp"
         android:orientation="vertical"
         android:background="@drawable/rounded_box"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="169dp"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/subtitleTextView"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp">
 
-        <!-- Message Safety Score (TextView on top, left-aligned) -->
         <TextView
             android:id="@+id/scoreSafeTextView"
             android:layout_width="wrap_content"
@@ -49,11 +50,9 @@
             android:textColor="#333333"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:layout_gravity="start"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"/>
 
-        <!-- Horizontal Layout for Emoji and Texts -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -62,7 +61,6 @@
             android:layout_marginTop="8dp"
             android:layout_marginLeft="40dp">
 
-            <!-- Emoji Image -->
             <ImageView
                 android:id="@+id/emojiImageView"
                 android:layout_width="90dp"
@@ -70,20 +68,17 @@
                 android:src="@drawable/result_100"
                 android:layout_marginEnd="16dp" />
 
-            <!-- Vertical Layout for Score, Icons, and Safe Message -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:gravity="center_vertical">
 
-                <!-- Horizontal Layout for Score and Result Text -->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <!-- Score Text -->
                     <TextView
                         android:id="@+id/scoreTextView"
                         android:layout_width="wrap_content"
@@ -94,7 +89,6 @@
                         android:textSize="48sp"
                         android:textStyle="bold" />
 
-                    <!-- Result Text (Right of Score) -->
                     <TextView
                         android:id="@+id/resultTextView"
                         android:layout_width="wrap_content"
@@ -108,7 +102,6 @@
                         android:layout_marginTop="10dp"/>
                 </LinearLayout>
 
-                <!-- Icons Layout -->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -137,7 +130,6 @@
                         android:src="@drawable/greymark" />
                 </LinearLayout>
 
-                <!-- Safe Message Text -->
                 <TextView
                     android:id="@+id/safeMessageTextView"
                     android:layout_width="wrap_content"
@@ -157,16 +149,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="다른 문자 검사하기"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:padding="10dp"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold"
         app:backgroundTint="#407FFF"
         app:cornerRadius="8dp"
-        tools:layout_editor_absoluteX="103dp"
-        tools:layout_editor_absoluteY="420dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/resultBox"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,15 +7,18 @@
     android:background="#F4F4F8"
     tools:context=".ResultActivity">
 
+    <!-- Title Image -->
     <ImageView
         android:id="@+id/resultTitleTextImage"
         android:layout_width="100dp"
         android:layout_height="21dp"
         android:src="@drawable/nugushow_blue"
-        tools:layout_editor_absoluteX="20dp"
-        tools:layout_editor_absoluteY="50dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp" />
 
+    <!-- Subtitle Text -->
     <TextView
         android:id="@+id/subtitleTextView"
         android:layout_width="wrap_content"
@@ -24,23 +27,27 @@
         android:textStyle="bold"
         android:textColor="#333333"
         android:textSize="26sp"
-        tools:layout_editor_absoluteX="33dp"
-        tools:layout_editor_absoluteY="102dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/resultTitleTextImage"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="10dp" />
 
+    <!-- Result Box -->
     <LinearLayout
         android:id="@+id/resultBox"
-        android:layout_width="400dp"
+        android:layout_width="0dp"
         android:layout_height="222dp"
-
         android:padding="16dp"
         android:orientation="vertical"
         android:background="@drawable/rounded_box"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="169dp"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintTop_toBottomOf="@id/subtitleTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp">
 
-        <!-- Message Safety Score (TextView on top, left-aligned) -->
+        <!-- Message Safety Score Text -->
         <TextView
             android:id="@+id/scoreSafeTextView"
             android:layout_width="wrap_content"
@@ -153,21 +160,23 @@
         </LinearLayout>
     </LinearLayout>
 
+    <!-- Button for Checking Another Message -->
     <Button
         android:id="@+id/checkAnotherButton"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="다른 문자 검사하기"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:padding="10dp"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold"
         app:backgroundTint="#407FFF"
         app:cornerRadius="8dp"
-        tools:layout_editor_absoluteX="103dp"
-        tools:layout_editor_absoluteY="420dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@id/resultBox"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

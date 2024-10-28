@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#5969FF"
-    tools:layout_editor_absoluteY="25dp">
+    android:background="#5969FF">
 
     <ImageView
         android:id="@+id/mainTitleTextImage"
@@ -16,19 +15,6 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="50dp"
         android:layout_marginStart="20dp" />
-
-<!--    <TextView-->
-<!--        android:id="@+id/mainDescriptionTextView"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:gravity="left"-->
-<!--        android:text="해송님, 지금까지 \n10번 만큼 \n폰을 지켰어요!"-->
-<!--        android:textColor="#FFFFFF"-->
-<!--        android:textSize="28sp"-->
-<!--        android:layout_marginTop="8dp"-->
-<!--        tools:layout_editor_absoluteX="32dp"-->
-<!--        tools:layout_editor_absoluteY="107dp"-->
-<!--        tools:ignore="MissingConstraints" />-->
 
     <TextView
         android:id="@+id/mainDescriptionTextView"
@@ -43,15 +29,6 @@
         android:layout_marginTop="23dp"
         android:layout_marginStart="32dp" />
 
-<!--    <ImageView-->
-<!--        android:id="@+id/smallLockIcon"-->
-<!--        android:layout_width="20dp"-->
-<!--        android:layout_height="20dp"-->
-<!--        android:src="@drawable/small_lockin"-->
-<!--        tools:layout_editor_absoluteX="40dp"-->
-<!--        tools:layout_editor_absoluteY="260dp"-->
-<!--        tools:ignore="MissingConstraints" />-->
-
     <ImageView
         android:id="@+id/smallLockIcon"
         android:layout_width="20dp"
@@ -62,20 +39,6 @@
         android:layout_marginTop="30dp"
         android:layout_marginStart="40dp" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/hashTagTextView"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@drawable/tag_background"-->
-<!--        android:gravity="center"-->
-<!--        android:padding="8dp"-->
-<!--        android:text="    #폰지키미"-->
-<!--        android:textColor="#FFFFFF"-->
-<!--        android:textSize="18sp"-->
-<!--        android:textStyle="bold"-->
-<!--        tools:layout_editor_absoluteX="32dp"-->
-<!--        tools:layout_editor_absoluteY="248dp"-->
-<!--        tools:ignore="MissingConstraints" />-->
     <TextView
         android:id="@+id/hashTagTextView"
         android:layout_width="wrap_content"
@@ -97,10 +60,12 @@
         android:layout_width="190dp"
         android:layout_height="195dp"
         android:src="@drawable/lockin"
-        tools:layout_editor_absoluteX="224dp"
-        tools:layout_editor_absoluteY="228dp"
-        tools:ignore="MissingConstraints" />
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="-200dp"
+        android:layout_marginStart="224dp" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card1"
@@ -108,9 +73,10 @@
         android:layout_height="320dp"
         app:cardCornerRadius="17dp"
         app:cardElevation="4dp"
-        tools:layout_editor_absoluteX="70dp"
-        tools:layout_editor_absoluteY="410dp"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="410dp"
+        android:layout_marginStart="70dp">
 
         <!-- 내부 ConstraintLayout -->
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -123,7 +89,6 @@
                 android:id="@+id/cardTitleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
                 android:text="문자 검사"
                 android:textColor="#333333"
                 android:textSize="25sp"
@@ -137,7 +102,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginLeft="5dp"
                 android:text="피싱 문자메시지 검사하기"
                 android:textColor="#777777"
                 android:textSize="17sp"
@@ -171,23 +135,24 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Page Indicator -->
+    <!-- Page Indicator (LinearLayout) -->
     <LinearLayout
         android:id="@+id/pageIndicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteX="186dp"
-        tools:layout_editor_absoluteY="762dp"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintTop_toBottomOf="@id/card1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp" />
 
-    </LinearLayout>
-
+    <!-- ImageView Indicator -->
     <ImageView
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:src="@drawable/indicator"
-        tools:layout_editor_absoluteX="184dp"
-        tools:layout_editor_absoluteY="742dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@id/pageIndicator"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
