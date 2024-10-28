@@ -12,9 +12,23 @@
         android:layout_width="100dp"
         android:layout_height="21dp"
         android:src="@drawable/nugushow_white1"
-        tools:layout_editor_absoluteX="20dp"
-        tools:layout_editor_absoluteY="50dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="20dp" />
+
+<!--    <TextView-->
+<!--        android:id="@+id/mainDescriptionTextView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:gravity="left"-->
+<!--        android:text="해송님, 지금까지 \n10번 만큼 \n폰을 지켰어요!"-->
+<!--        android:textColor="#FFFFFF"-->
+<!--        android:textSize="28sp"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        tools:layout_editor_absoluteX="32dp"-->
+<!--        tools:layout_editor_absoluteY="107dp"-->
+<!--        tools:ignore="MissingConstraints" />-->
 
     <TextView
         android:id="@+id/mainDescriptionTextView"
@@ -24,20 +38,44 @@
         android:text="해송님, 지금까지 \n10번 만큼 \n폰을 지켰어요!"
         android:textColor="#FFFFFF"
         android:textSize="28sp"
-        android:layout_marginTop="8dp"
-        tools:layout_editor_absoluteX="32dp"
-        tools:layout_editor_absoluteY="107dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mainTitleTextImage"
+        android:layout_marginTop="23dp"
+        android:layout_marginStart="32dp" />
+
+<!--    <ImageView-->
+<!--        android:id="@+id/smallLockIcon"-->
+<!--        android:layout_width="20dp"-->
+<!--        android:layout_height="20dp"-->
+<!--        android:src="@drawable/small_lockin"-->
+<!--        tools:layout_editor_absoluteX="40dp"-->
+<!--        tools:layout_editor_absoluteY="260dp"-->
+<!--        tools:ignore="MissingConstraints" />-->
 
     <ImageView
         android:id="@+id/smallLockIcon"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:src="@drawable/small_lockin"
-        tools:layout_editor_absoluteX="40dp"
-        tools:layout_editor_absoluteY="260dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mainDescriptionTextView"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="40dp" />
 
+<!--    <TextView-->
+<!--        android:id="@+id/hashTagTextView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@drawable/tag_background"-->
+<!--        android:gravity="center"-->
+<!--        android:padding="8dp"-->
+<!--        android:text="    #폰지키미"-->
+<!--        android:textColor="#FFFFFF"-->
+<!--        android:textSize="18sp"-->
+<!--        android:textStyle="bold"-->
+<!--        tools:layout_editor_absoluteX="32dp"-->
+<!--        tools:layout_editor_absoluteY="248dp"-->
+<!--        tools:ignore="MissingConstraints" />-->
     <TextView
         android:id="@+id/hashTagTextView"
         android:layout_width="wrap_content"
@@ -49,9 +87,10 @@
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="32dp"
-        tools:layout_editor_absoluteY="248dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/smallLockIcon"
+        android:layout_marginTop="-32dp"
+        android:layout_marginStart="32dp" />
 
     <ImageView
         android:id="@+id/lockIcon"
