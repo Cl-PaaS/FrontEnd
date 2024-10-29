@@ -87,8 +87,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        TextView descriptionTextView = findViewById(R.id.mainDescriptionTextView);
-
         String text = "해송님, 지금까지 \n38번 만큼 \n폰을 지켰어요!";
         SpannableString spannable = new SpannableString(text);
 

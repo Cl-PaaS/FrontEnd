@@ -8,7 +8,6 @@ public class ResponseData2 {
     private boolean isPhishing;
 
     public ResponseData2() {
-        // 기본 생성자
     }
 
     public boolean isPhishing() {
