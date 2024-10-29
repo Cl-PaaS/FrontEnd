@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        TextView descriptionTextView = findViewById(R.id.mainDescriptionTextView);
 
-        String text = "해송님, 지금까지 \n10번 만큼 \n폰을 지켰어요!";
+        String text = "해송님, 지금까지 \n12번 만큼 \n폰을 지켰어요!";
         SpannableString spannable = new SpannableString(text);
 
         // "땡땡" 부분을 굵게 설정
