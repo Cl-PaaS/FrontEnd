@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        TextView descriptionTextView = findViewById(R.id.mainDescriptionTextView);
 
-        String text = "해송님, 지금까지 \n12번 만큼 \n폰을 지켰어요!";
+        String text = "해송님, 지금까지 \n38번 만큼 \n폰을 지켰어요!";
         SpannableString spannable = new SpannableString(text);
 
         // "땡땡" 부분을 굵게 설정
@@ -126,25 +126,16 @@ public class MainActivity extends AppCompatActivity {
                     RequestData1 requestData1 = new RequestData1();
                     RequestData2 requestData2 = new RequestData2();
                     RequestData3 requestData3 = new RequestData3();
-//                    requestData.setAndroidId(android_id); // FID 설정
-                    requestData1.setMessage(message); // 메시지 설정
-                    requestData2.setMessage(message); // 메시지 설정
-                    requestData3.setMessage(message); // 메시지 설정
 
-//                    service = RetrofitClient.getClient(message).create(RetrofitService.class);
-//                    service = RetrofitClient.getApiServiceForSpring();
-//                    service = RetrofitClient.getApiServiceForFlask();
-//                    service = RetrofitClient.getApiServiceForNestJS();
+                    // 메시지 설정
+                    requestData1.setMessage(message);
+                    requestData2.setMessage(message);
+                    requestData3.setMessage(message);
 
                     // RetrofitService 인스턴스 생성 수정
                     RetrofitService service1 = RetrofitClient.getApiServiceForSpring();
                     RetrofitService service2 = RetrofitClient.getApiServiceForFlask();
                     RetrofitService service3 = RetrofitClient.getApiServiceForNestJS();
-
-                    // 병렬로 API 호출
-//                    Call<ResponseData1> call1 = service.requestDataFromApi1(requestData1);
-//                    Call<ResponseData2> call2 = service.requestDataFromApi2(requestData2);
-//                    Call<ResponseData3> call3 = service.requestDataFromApi3(requestData3);
 
                     Call<ResponseData1> call1 = service1.requestDataFromApi1(requestData1);
                     Call<ResponseData2> call2 = service2.requestDataFromApi2(requestData2);
@@ -157,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
                             if (response.isSuccessful() && response.body() != null) {
                                 handleApiResult(response.body(), 1);
                             } else {
-              Log.d("API 1 응답 실패", "응답을 받지 못했습니다.");
+                                Log.d("API 1 응답 실패", "응답을 받지 못했습니다.");
                             }
                         }
 
@@ -183,8 +174,8 @@ public class MainActivity extends AppCompatActivity {
                             t.printStackTrace();
                         }
                     });
-//
-//                    // 세 번째 API 호출
+
+                    // 세 번째 API 호출
                     call3.enqueue(new Callback<ResponseData3>() {
                         @Override
                         public void onResponse(Call<ResponseData3> call, Response<ResponseData3> response) {
