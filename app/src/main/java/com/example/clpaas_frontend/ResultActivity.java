@@ -29,7 +29,7 @@ public class ResultActivity extends AppCompatActivity {
                 setContentView(R.layout.activity_result_safe); // 보통 또는 좋음
                 break;
             default:
-                setContentView(R.layout.activity_result_mid); // 기본값으로 안전 화면 설정
+                setContentView(R.layout.activity_result_mid); // 기본값으로 위험 화면 설정
                 break;
         }
 
