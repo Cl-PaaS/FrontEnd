@@ -2,18 +2,157 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="#5969FF">
+
+    <ImageView
+        android:id="@+id/mainTitleTextImage"
+        android:layout_width="100dp"
+        android:layout_height="21dp"
+        android:src="@drawable/nugushow_white1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="20dp" />
 
     <TextView
+        android:id="@+id/mainDescriptionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="left"
+        android:text="해송님, 지금까지 \n10번 만큼 \n폰을 지켰어요!"
+        android:textColor="#FFFFFF"
+        android:textSize="28sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/mainTitleTextImage"
+        android:layout_marginTop="23dp"
+        android:layout_marginStart="32dp" />
 
+    <ImageView
+        android:id="@+id/smallLockIcon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/small_lockin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mainDescriptionTextView"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="40dp" />
+
+    <TextView
+        android:id="@+id/hashTagTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/tag_background"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="    #폰지키미"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/smallLockIcon"
+        android:layout_marginTop="-30dp"
+        android:layout_marginStart="32dp" />
+
+    <ImageView
+        android:id="@+id/lockIcon"
+        android:layout_width="190dp"
+        android:layout_height="195dp"
+        android:src="@drawable/lockin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="-200dp"
+        android:layout_marginStart="224dp" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card1"
+        android:layout_width="270dp"
+        android:layout_height="320dp"
+        app:cardCornerRadius="17dp"
+        app:cardElevation="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="410dp"
+        android:layout_marginStart="70dp">
+
+        <!-- 내부 ConstraintLayout -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="270dp"
+            android:layout_height="320dp"
+            android:padding="16dp">
+
+            <!-- 카드 제목 -->
+            <TextView
+                android:id="@+id/cardTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="문자 검사"
+                android:textColor="#333333"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- 카드 설명 -->
+            <TextView
+                android:id="@+id/cardDescriptionTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="피싱 문자메시지 검사하기"
+                android:textColor="#777777"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardTitleTextView" />
+
+            <ImageView
+                android:id="@+id/messageImageView"
+                android:layout_width="90dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="76dp"
+                android:layout_marginTop="40dp"
+                android:src="@drawable/message_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardDescriptionTextView" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/startButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="검사 시작하기"
+                android:textColor="#FFFFFF"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:backgroundTint="#F57171"
+                app:cornerRadius="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/messageImageView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Page Indicator (LinearLayout) -->
+    <LinearLayout
+        android:id="@+id/pageIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/card1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp" />
+
+    <!-- ImageView Indicator -->
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/indicator"
+        app:layout_constraintTop_toBottomOf="@id/pageIndicator"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
